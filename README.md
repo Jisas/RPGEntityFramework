@@ -7,7 +7,7 @@ A modular system for creating and managing races, classes, and attributes in RPG
 ### Unity Package Manager
 Copy the following link:
 ```json
-https://github.com/tu-usuario/RPGFramework.git?path=/Packages/com.glintstudio.rpgframework
+https://github.com/Jisas/RPGFramework.git?path=/Packages/com.glintstudio.rpgframework
 ```
 Go to Unity and open the package manager. In the upper left corner, click on the ‘+’ symbol and select the option ‘Install package from a git URL...’ and paste the link above.
 
