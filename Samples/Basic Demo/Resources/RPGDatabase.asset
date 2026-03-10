@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa1d7da91c269f549b0eb82f8cf93a9e, type: 3}
+  m_Name: RPGDatabase
+  m_EditorClassIdentifier: 
+  allRaces:
+  - {fileID: 11400000, guid: ffbaace0eda4ae640ac158ce46b49efd, type: 2}
+  - {fileID: 11400000, guid: 34d1bdfba2a207b43bddaf80377744ea, type: 2}
+  - {fileID: 11400000, guid: 3e355f660adf9d54986a9445cc785fde, type: 2}
+  allSubRaces:
+  - {fileID: 11400000, guid: 6f03c94db7189404fb55c7ba8e5996da, type: 2}
+  - {fileID: 11400000, guid: 1490fd2b227d2544eaf96ffae4121c8b, type: 2}
+  allClasses:
+  - {fileID: 11400000, guid: 924c49c7bd4e17a4ab1a8f73f9d10076, type: 2}
+  - {fileID: 11400000, guid: 90cb4a58bca5aa64f80ae5462786c258, type: 2}
+  allSubClasses:
+  - {fileID: 11400000, guid: f020f40f09c6b394ba1fef3f2015ae1e, type: 2}
+  - {fileID: 11400000, guid: 71941d7b179a50f4c99712ee830daab7, type: 2}
+  - {fileID: 11400000, guid: 0c6bbf1b359508546b6abd879745df6e, type: 2}
+  - {fileID: 11400000, guid: 6d0c7bb91eb143b4a9d94f22e2ffb260, type: 2}
+  allAttributes:
+  - {fileID: 11400000, guid: 80e19503ae58d5242b8aba4621a22628, type: 2}
+  - {fileID: 11400000, guid: f0c76e4b69696364ea5b2faaee20db4b, type: 2}
+  - {fileID: 11400000, guid: b4d54d420e57cd44dab21375a538f6f0, type: 2}
+  allAbilities: []

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0009ecb1db0de2438ee3eaa1aee7a9d, type: 3}
+  m_Name: Vastaya
+  m_EditorClassIdentifier: 
+  raceName: Vastaya
+  description: 
+  icon: {fileID: 0}
+  racialAbilities: []
+  availableSubRaces:
+  - {fileID: 11400000, guid: 6f03c94db7189404fb55c7ba8e5996da, type: 2}
+  - {fileID: 11400000, guid: 1490fd2b227d2544eaf96ffae4121c8b, type: 2}
+  availableClasses: []
