@@ -23,5 +23,9 @@
       "description": "Ejemplo de como configurar razas, clases y atributos.",
       "path": "Samples~/BasicDemo"
     }
-  ]
+  ],
+  "dependencies": {
+    "com.unity.textmeshpro": "3.0.6",
+    "com.unity.modules.ui": "1.0.0"
+   }
 }
