@@ -1,20 +1,21 @@
 {
-  "name": "com.jc_gaming.rpgframework",
+  "name": "com.jisas.rpgframework",
   "displayName": "RPG Framework",
-  "version": "1.0.0",
-  "unity": "2024.0",
+  "version": "0.0.1",
+  "unity": "6000.4",
   "description": "Crea sistemas de razas, clases, subclases y atributos personalizables para RPGs.",
   "keywords": [
     "rpg",
     "framework",
     "unity",
     "editor",
-    "toolkit"
+    "toolkit",
+    "tool"
   ],
   "author": {
-    "name": "JC Gaming",
-    "email": "jesuscarrerodev@gmail.com",
-    "url": "https://github.com/Jisas"
+    "name": "Jisas",
+    "url": "https://github.com/Jisas",
+    "email": "jesuscarrerodev@gmail.com"
   },
   "samples": [
     {

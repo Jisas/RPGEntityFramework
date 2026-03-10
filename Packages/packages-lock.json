@@ -1,12 +1,10 @@
 {
   "dependencies": {
-    "com.unity.multiplayer.center": {
-      "version": "1.0.1",
+    "com.jisas.rpgframework": {
+      "version": "file:com.jisas.rpgframework",
       "depth": 0,
-      "source": "builtin",
-      "dependencies": {
-        "com.unity.modules.uielements": "1.0.0"
-      }
+      "source": "embedded",
+      "dependencies": {}
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

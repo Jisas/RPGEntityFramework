@@ -1,0 +1,17 @@
+{
+    "name": "RPGFramework.Samples",
+    "rootNamespace": "",
+    "references": [
+        "GUID:5ffb32b624c62404a9ac2d9f2b1705ba",
+        "GUID:921216d3b01e4d5419940ec0f6f0ad92"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

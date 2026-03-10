@@ -1,7 +1,7 @@
+using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
 using TMPro;
-using UnityEngine.UI;
 
 public class TestUI : MonoBehaviour
 {
