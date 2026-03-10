@@ -11,10 +11,10 @@ https://github.com/Jisas/RPGFramework.git?path=/Packages/com.glintstudio.rpgfram
 ```
 Go to Unity and open the package manager. In the upper left corner, click on the ‘+’ symbol and select the option ‘Install package from a git URL...’ and paste the link above.
 
-## Documentaci�n
+## Documentation
 
 See the `Documentation~/` folder for tutorials and examples.
 
-## Soporte
+## Support
 
 Questions? Contact us or open an issue in our repository.
