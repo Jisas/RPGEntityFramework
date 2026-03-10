@@ -2,7 +2,7 @@
   "name": "com.jisas.rpgframework",
   "displayName": "RPG Framework",
   "version": "0.0.1",
-  "unity": "6000.4",
+  "unity": "6000.0",
   "description": "Crea sistemas de razas, clases, subclases y atributos personalizables para RPGs.",
   "keywords": [
     "rpg",
@@ -27,5 +27,5 @@
   "dependencies": {
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.modules.ui": "1.0.0"
-   }
+  }
 }

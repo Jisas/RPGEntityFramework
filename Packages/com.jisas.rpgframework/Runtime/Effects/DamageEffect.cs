@@ -3,10 +3,10 @@ using System;
 
 namespace RPGFramework
 {
-    public class DamageEffect : IEffect<Enemy>
+    public class DamageEffect : IEffect<IDamagable>
     {
         // Ejecución del efecto
-        public void Apply(Enemy target)
+        public void Apply(IDamagable target)
         {
             if (target == null) return;
 
