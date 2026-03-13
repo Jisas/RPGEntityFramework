@@ -1,4 +1,4 @@
-# ⚔️ RPG Framework | Complex Character Architecture
+# ⚔️ RPG Entity Framework | Complex Character Architecture
 
 ![Unity](https://img.shields.io/badge/Unity-2022.3+-black?logo=unity)
 ![C#](https://img.shields.io/badge/C%23-7.3+-purple?logo=csharp)
