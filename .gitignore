@@ -81,3 +81,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # My custom folder
+[Aa]ssets.meta
+[Aa]ssets
