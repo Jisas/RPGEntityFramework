@@ -1,0 +1,4 @@
+﻿<Solution>
+  <Project Path="Unity.VisualStudio.Editor.csproj" />
+  <Project Path="RPGEntityFramework.Runtime.csproj" />
+</Solution>
