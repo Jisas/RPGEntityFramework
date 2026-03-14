@@ -86,6 +86,7 @@ namespace RPGFramework.Editor
             // Carga inicial (marcando el primero como activo)
             var initialBtn = root.Q<VisualElement>("nav-races");
             SelectCategory("Race", _database.allRaces, initialBtn);
+            ShowInInspector(null);
         }
 
         private void SetupButtons()
@@ -262,12 +263,13 @@ namespace RPGFramework.Editor
         }
         private void ShowInInspector(List<object> selectedItems)
         {
-            // 1. Determinar si hay algo válido seleccionado
+            // 1.Limpieza obligatoria: eliminamos lo que hubiera antes en el inspector
+            _inspectorContent.Clear();
+
+            // 2. Determinar si hay algo válido seleccionado
             bool hasSelection = selectedItems != null && selectedItems.Count > 0 && selectedItems[0] != null;
 
-            // 2. Cambiar visibilidad usando DisplayStyle
-            // Si hay selección: Ocultamos placeholder, mostramos columna.
-            // Si no hay: Mostramos placeholder, ocultamos columna.
+            // 3. Gestionar visibilidad de las columnas
             _inspectorPlaceHolder.style.display = hasSelection ? DisplayStyle.None : DisplayStyle.Flex;
             _inspectorColumn.style.display = hasSelection ? DisplayStyle.Flex : DisplayStyle.None;
 
@@ -275,6 +277,7 @@ namespace RPGFramework.Editor
 
             var target = selectedItems[0] as ScriptableObject;
 
+            // 4. Actualizar el encabezado (Icono, ID, Título)
             if (target is RPGDefinition rpgData)
             {
                 _inspectorIcon.style.backgroundImage = Background.FromSprite(rpgData.Icon);
@@ -289,6 +292,7 @@ namespace RPGFramework.Editor
             _inspectorTitle.text = target.name;
             _inspectorDefinition.text = $"{target.GetType().Name}(ScriptableObject)";
 
+            // 5. Dibujar los campos de propiedades
             SerializedObject so = new(target);
             SerializedProperty prop = so.GetIterator();
             prop.NextVisible(true); // Saltar m_Script
