@@ -32,7 +32,7 @@ graph TD
 ## 🚀 Installation
 This framework is structured as a native UPM Package. To install it, open the Unity Package Manager, select "Install package from git URL," and paste the following link:
 ```link
-git@github.com:Jisas/RPGFramework.git?path=/Packages/com.jisas.rpgframework
+git@github.com:Jisas/RPGEntityFramework.git?path=/Packages/com.jisas.rpgframework
 ```
 
 ## 🛠️ Key Features (In Development)
