@@ -16,11 +16,23 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 97d833db2efe0014e8492573fcaf3bcb, type: 3}
   raceName: Vasteri
   description: 
+  baseAttributes:
+  - attribute: {fileID: 11400000, guid: 80e19503ae58d5242b8aba4621a22628, type: 2}
+    value: 5
+  - attribute: {fileID: 11400000, guid: f0c76e4b69696364ea5b2faaee20db4b, type: 2}
+    value: 3
+  - attribute: {fileID: 11400000, guid: b4d54d420e57cd44dab21375a538f6f0, type: 2}
+    value: 7
+  - attribute: {fileID: 11400000, guid: c35210c8d49fec044b41c102ffceba34, type: 2}
+    value: 10
   availableSubRaces:
   - {fileID: 11400000, guid: 6f03c94db7189404fb55c7ba8e5996da, type: 2}
   - {fileID: 11400000, guid: 1490fd2b227d2544eaf96ffae4121c8b, type: 2}
+  - {fileID: 11400000, guid: a55ee6e47ddb4a245b72c7555ad3b1be, type: 2}
   availableClasses:
   - {fileID: 11400000, guid: 924c49c7bd4e17a4ab1a8f73f9d10076, type: 2}
   - {fileID: 11400000, guid: 90cb4a58bca5aa64f80ae5462786c258, type: 2}
+  - {fileID: 11400000, guid: a13ec6d331275244eafa5fff2f143216, type: 2}
+  - {fileID: 11400000, guid: b317bcb599c49e8429fbf134f7d7ea98, type: 2}
   racialAbilities:
   - {fileID: 11400000, guid: 60d8ea39bc0c7ff4ea39442538e4f899, type: 2}

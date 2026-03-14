@@ -16,5 +16,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   subRaceName: Lizard
   description: 
+  bonusAttributes:
+  - attribute: {fileID: 11400000, guid: c35210c8d49fec044b41c102ffceba34, type: 2}
+    value: 10
   subRacialAbilities: []
-  bonusAttributes: []

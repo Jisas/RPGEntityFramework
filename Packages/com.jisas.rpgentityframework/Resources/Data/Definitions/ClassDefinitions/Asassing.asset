@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b74e6148d0955489a704c19a2ce867, type: 3}
+  m_Name: Asassing
+  m_EditorClassIdentifier: RPGEntityFramework.Runtime::RPGEntityFramework.Data.ClassDefinition
+  id: c18fcbf7-2eae-45c1-ab96-02c3c58b687f
+  icon: {fileID: 0}
+  className: Asassing
+  description: 
+  bonusAttributes:
+  - attribute: {fileID: 11400000, guid: 80e19503ae58d5242b8aba4621a22628, type: 2}
+    value: 5
+  availableSubClasses:
+  - {fileID: 11400000, guid: ad088064b93e68a449ec0d2fed068d72, type: 2}

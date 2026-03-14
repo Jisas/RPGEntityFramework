@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/RGPEntityWindow_Style.uss?fileID=7433441132597879392&amp;guid=7b4ac743a1328e249aff33624ddf0e6d&amp;type=3#RGPEntityWindow_Style"/>
+    <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/TestBuilderTemplate_Style.uss?fileID=7433441132597879392&amp;guid=5dae0104a295a254da17647ecab2177e&amp;type=3#TestBuilderTemplate_Style"/>
+    <ui:VisualElement class="bg-dark log-item" style="border-left-width: 0; padding: 6px; cursor: link; justify-content: space-between;">
+        <ui:VisualElement style="flex-grow: initial; flex-direction: row; align-items: center; justify-content: flex-start;">
+            <ui:VisualElement name="icon" style="flex-grow: initial; height: 20px; width: 20px; background-image: resource(&quot;Icons/file-box&quot;); margin-right: 5px;"/>
+            <ui:Label text="Preset Name" name="preset-name" class="text-xs text-white"/>
+        </ui:VisualElement>
+        <ui:Button text="" tooltip="Load Preset" icon-image="project://database/Packages/com.jisas.rpgentityframework/Resources/Icons/upload.png?fileID=21300000&amp;guid=689677747a0cbc644b09e65a1900e2de&amp;type=3#upload" name="upload-btn" class="text-white" style="padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px; width: 25px; height: 25px;"/>
+    </ui:VisualElement>
+</ui:UXML>

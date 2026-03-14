@@ -35,8 +35,7 @@ namespace RPGFramework.Editor
         private ListView _itemList;
 
         private VisualElement _navbar;
-        private System.Type _currentType; // Para saber qué estamos creando
-        private readonly string _basePath = "Packages/com.jisas.rpgentityframework/Resources/Data/Definitions";
+        private System.Type _currentType;
         private RPGEntityDatabase _database;
 
         // Iconos para el estado Dirty
@@ -44,9 +43,15 @@ namespace RPGFramework.Editor
         private Sprite _warningIcon;
         private bool _isDirty = false;
 
+        private const string BASE_PATH = "Packages/com.jisas.rpgentityframework/Resources/Data/Definitions";
+        private const string ROOT_VISUAL_TREE_PATH = "Packages/com.jisas.rpgentityframework/Editor/UXML/RGPEntityWindow.uxml";
+        private const string PRESET_TEMPLATE_PATH = "Packages/com.jisas.rpgentityframework/Editor/Templates/QuickPresetTemplate.uxml";
+        private const string STAT_TEMPLATE_PATH = "Packages/com.jisas.rpgentityframework/Editor/Templates/StatItemTemplate.uxml";
+        private const string LOG_TEMPLATE_PATH = "Packages/com.jisas.rpgentityframework/Editor/Templates/LogElementTemplate.uxml";
+
         public void CreateGUI()
         {
-            var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.jisas.rpgentityframework/Editor/UXML/RGPEntityWindow.uxml");
+            var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(ROOT_VISUAL_TREE_PATH);
             VisualElement root = visualTree.Instantiate();
             rootVisualElement.Add(root);
 
@@ -83,6 +88,7 @@ namespace RPGFramework.Editor
             SetupListView();
             SetupButtons();
             PopulateTestBuilderDropdowns();
+            PopulateQuickPresets();
 
             // Detectar cualquier cambio en el Inspector
             root.RegisterCallback<SerializedPropertyChangeEvent>(evt =>
@@ -116,15 +122,6 @@ namespace RPGFramework.Editor
             var initialBtn = root.Q<VisualElement>("nav-races");
             SelectCategory("Race", _database.allRaces, initialBtn);
             ShowInInspector(null);
-        }
-        private void OnDestroy()
-        {
-            _saveButton.clicked -= Save;
-            _createButton.clicked -= CreateNewEntity;
-            _settingsButton.clicked -= SetSettingsContextMenus;
-            _btnRunScan.clicked -= RunFullDatabaseScan;
-            _btnRecalculate.clicked -= RecalculateStats;
-            _clearConsoloBtn.clicked -= ClearTestConsole;
         }
 
         private void SetupButtons()
@@ -163,7 +160,7 @@ namespace RPGFramework.Editor
             if (_currentType == null) return;
 
             // 1. Definir ruta (Base + Tipo)
-            string folderPath = $"{_basePath}/{_currentType.Name}s";
+            string folderPath = $"{BASE_PATH}/{_currentType.Name}s";
             if (!AssetDatabase.IsValidFolder(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
@@ -406,6 +403,7 @@ namespace RPGFramework.Editor
             AssetDatabase.Refresh();
             _itemList.Rebuild();
             PopulateTestBuilderDropdowns();
+            PopulateQuickPresets();
             ClearDirty();
 
             Debug.Log("Base de datos actualizada y archivos renombrados.");
@@ -467,10 +465,65 @@ namespace RPGFramework.Editor
             _subClassDropdown.choices = GetNames(_database.allSubClasses, true);
             _subClassDropdown.value = _subClassDropdown.choices[0];
         }
+        private void PopulateQuickPresets()
+        {
+            // Buscamos el contenedor dentro del Test Builder (ajusta el nombre si es distinto en tu UXML)
+            VisualElement container = _testBuilderContainer.Q<VisualElement>("presets-list-container");
+            if (container == null) return;
+
+            container.Clear();
+
+            if (_database.allPresets == null || _database.allPresets.Count == 0)
+            {
+                Label log = new ("No presets found in database.");
+                log.AddToClassList("text-muted");
+                log.AddToClassList("text-xs");
+                container.Add(log);
+                return;
+            }
+
+            // Cargamos el asset del template
+            VisualTreeAsset tree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(PRESET_TEMPLATE_PATH);
+
+            foreach (var preset in _database.allPresets)
+            {
+                if (preset == null) continue;
+
+                // Instanciar el template
+                VisualElement entry = tree.Instantiate();
+
+                // Configurar los datos internos (basado en los nombres de tu UXML)
+                Label nameLabel = entry.Q<Label>("preset-name"); // Nombre del Label en tu snippet
+
+                if (nameLabel != null)
+                    nameLabel.text = string.IsNullOrEmpty(preset.characterName) ? preset.name : preset.characterName;
+
+                Button uploadBtn = entry.Q<Button>("upload-btn");
+                uploadBtn.clicked += () => LoadPresetIntoBuilder(preset);
+
+                // Añadir al contenedor
+                container.Add(entry);
+            }
+        }
+        private void LoadPresetIntoBuilder(EntityPresetDefinition preset)
+        {
+            if (preset == null) return;
+
+            // Actualizamos los valores de los dropdowns
+            // Nota: Esto disparará los eventos 'RegisterValueChangedCallback' que ya tengas configurados
+            if (preset.race != null) _raceDropdown.value = preset.race.name;
+            if (preset.subRace != null) _subRaceDropdown.value = preset.subRace.name;
+            if (preset.classDef != null) _classDropdown.value = preset.classDef.name;
+            if (preset.subClass != null) _subClassDropdown.value = preset.subClass.name;
+
+            // Forzamos el recálculo para mostrar los stats del preset inmediatamente
+            RecalculateStats();
+            AddLog("Preset Loaded", $"Applied configuration: {preset.characterName}", LogType.Success);
+        }
         private void AddStat(string statName, string baseVal, string modVal, float fillPercent)
         {
             // Cargar el template
-            var template = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.jisas.rpgentityframework/Editor/Templates/StatItemTemplate.uxml");
+            var template = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(STAT_TEMPLATE_PATH);
             var statInst = template.Instantiate();
 
             // 1. Agregar la clase a la instancia para que ajuste su tamaño correctamente
@@ -497,7 +550,7 @@ namespace RPGFramework.Editor
         private void AddLog(string title, string description, LogType type)
         {
             // Cargar el template
-            var template = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.jisas.rpgentityframework/Editor/Templates/LogElementTemplate.uxml");
+            var template = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(LOG_TEMPLATE_PATH);
             var logInst = template.Instantiate();
 
             // Obtener referencias internas

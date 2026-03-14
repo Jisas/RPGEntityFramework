@@ -15,9 +15,9 @@ MonoBehaviour:
   id: 0d63dae7-56ad-4c73-990b-7820b0cf5076
   icon: {fileID: 0}
   characterName: Astrion
-  race: {fileID: 0}
-  subRace: {fileID: 0}
-  classDef: {fileID: 0}
-  subClass: {fileID: 0}
+  race: {fileID: 11400000, guid: ffbaace0eda4ae640ac158ce46b49efd, type: 2}
+  subRace: {fileID: 11400000, guid: 1490fd2b227d2544eaf96ffae4121c8b, type: 2}
+  classDef: {fileID: 11400000, guid: b317bcb599c49e8429fbf134f7d7ea98, type: 2}
+  subClass: {fileID: 11400000, guid: ad088064b93e68a449ec0d2fed068d72, type: 2}
   attributes: []
   extraAbilities: []

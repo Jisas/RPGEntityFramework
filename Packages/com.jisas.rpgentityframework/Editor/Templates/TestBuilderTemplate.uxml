@@ -4,7 +4,10 @@
     <ui:ScrollView name="test-builder-root" class="test-builder-container">
         <ui:VisualElement name="test-header" class="test-header">
             <ui:VisualElement>
-                <ui:Label text="🧪 Test Builder &amp; Validator" class="bold text-lg text-white"/>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: center; margin-bottom: 5px; align-self: stretch; justify-content: center;">
+                    <ui:VisualElement style="flex-grow: initial; background-image: resource(&quot;Icons/test-tube&quot;); height: 30px; -unity-background-scale-mode: scale-to-fit; width: 30px; margin-right: 5px; -unity-background-image-tint-color: rgb(255, 255, 255);"/>
+                    <ui:Label text="Test Builder &amp; Validator" class="bold text-lg text-white"/>
+                </ui:VisualElement>
                 <ui:Label text="Simulate configurations and verify data integrity." class="text-xs text-muted"/>
             </ui:VisualElement>
             <ui:Button text="Run Full Database Scan" name="btn-run-scan" icon-image="project://database/Packages/com.jisas.rpgentityframework/Resources/Icons/scan-search.png?fileID=21300000&amp;guid=bce218fb78bbfb74a89900eec15e27c0&amp;type=3#scan-search" class="unity-button text-white" style="font-size: 13px;"/>
@@ -21,14 +24,7 @@
                 </ui:VisualElement>
                 <ui:VisualElement class="unity-panel test-panel" style="flex-grow: 1;">
                     <ui:Label text="QUICK PRESETS" class="panel-title"/>
-                    <ui:VisualElement style="flex-grow: 1;">
-                        <ui:VisualElement class="bg-dark log-item" style="border-left-width: 0; padding: 6px; cursor: link;">
-                            <ui:Label text="🟢 Level 1 Starter Warrior" class="text-xs text-white"/>
-                        </ui:VisualElement>
-                        <ui:VisualElement class="bg-dark log-item" style="border-left-width: 0; padding: 6px; cursor: link;">
-                            <ui:Label text="🟣 Endgame Boss Variant" class="text-xs text-white"/>
-                        </ui:VisualElement>
-                    </ui:VisualElement>
+                    <ui:VisualElement name="presets-list-container" style="flex-grow: 1;"/>
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement class="test-col-right">

@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 480994e9513658846b55cf1492573b2a, type: 3}
-  m_Name: LightPaladin
-  m_EditorClassIdentifier: 
-  id: 1a98e171-8150-49c6-b741-245b9a678fe9
+  m_Name: Shadow Slayer
+  m_EditorClassIdentifier: RPGEntityFramework.Runtime::RPGEntityFramework.Data.SubClassDefinition
+  id: aefba2ef-9a05-4a49-b36f-63fae7d03e85
   icon: {fileID: 0}
-  subClassName: Light Paladin
+  subClassName: Shadow Slayer
   description: 
+  bonusAttributes:
+  - attribute: {fileID: 11400000, guid: 80e19503ae58d5242b8aba4621a22628, type: 2}
+    value: 15
