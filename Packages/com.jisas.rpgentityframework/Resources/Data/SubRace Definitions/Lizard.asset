@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0640a3ea762c20c459a4f30f820b5f0a, type: 3}
   m_Name: Lizard
   m_EditorClassIdentifier: 
-  subRaceName: Lagarto
+  id: e1ab6b5b-c26e-45af-aa0a-cbde36587a28
+  icon: {fileID: 0}
+  subRaceName: Lizard
   description: 
   subRacialAbilities: []
   bonusAttributes: []

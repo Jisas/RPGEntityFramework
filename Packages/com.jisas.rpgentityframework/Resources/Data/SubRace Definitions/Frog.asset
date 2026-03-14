@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Frog
   m_EditorClassIdentifier: 
   id: 7b5c8ff8-2af2-4eec-ac8a-ecd87e059f1e
-  subRaceName: Rana
+  icon: {fileID: 0}
+  subRaceName: Frog
   description: 
   subRacialAbilities: []
   bonusAttributes:

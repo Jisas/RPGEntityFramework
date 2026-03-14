@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b56ec25ae8b9c4d86a3672fca021a6, type: 3}
   m_Name: Dexterity
   m_EditorClassIdentifier: 
-  attributeName: Destreza
-  description: 
+  id: d4ef91ab-2834-46a3-abe4-d4f9b86df78d
   icon: {fileID: 0}
+  attributeName: Dexterity
+  description: 

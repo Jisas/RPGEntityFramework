@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/ListElementTemplate_Style.uss?fileID=7433441132597879392&amp;guid=f8ba8a81b9591cb43a6542df96cce7d5&amp;type=3#ListElementTemplate_Style"/>
+    <ui:VisualElement class="template-base" style="justify-content: space-between;">
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="icon" class="template-icon" style="background-image: resource(&quot;Icons/zap&quot;);"/>
+            <ui:Label text="Label" name="name" class="template-name"/>
+        </ui:VisualElement>
+        <ui:Button text="" icon-image="project://database/Packages/com.jisas.rpgentityframework/Resources/Icons/minus.png?fileID=21300000&amp;guid=c58a62aa3ccd6864f9a7ff5ba0fdcd9e&amp;type=3#minus" name="delete-btn" class="template-btn"/>
+    </ui:VisualElement>
+</ui:UXML>

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0009ecb1db0de2438ee3eaa1aee7a9d, type: 3}
   m_Name: Elf
   m_EditorClassIdentifier: 
-  raceName: Elfo
+  id: 2bbc2873-7617-4d1f-9d2a-e80b983072a9
+  icon: {fileID: 21300000, guid: e0a91e06a440a384f891fda7d1dd8e2c, type: 3}
+  raceName: Elf
   description: 
-  icon: {fileID: 0}
-  racialAbilities: []
+  availableSubRaces: []
   availableClasses: []
+  racialAbilities: []

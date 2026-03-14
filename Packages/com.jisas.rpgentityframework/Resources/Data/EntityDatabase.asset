@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: RPGEntityFramework.Runtime::RPGEntityDatabase
   allRaces:
   - {fileID: 11400000, guid: ffbaace0eda4ae640ac158ce46b49efd, type: 2}
-  - {fileID: 11400000, guid: 3e355f660adf9d54986a9445cc785fde, type: 2}
   - {fileID: 11400000, guid: 34d1bdfba2a207b43bddaf80377744ea, type: 2}
+  - {fileID: 11400000, guid: 3e355f660adf9d54986a9445cc785fde, type: 2}
+  - {fileID: 11400000, guid: 10a5395ad0451e1429c0774856eddfec, type: 2}
   allSubRaces:
   - {fileID: 11400000, guid: 6f03c94db7189404fb55c7ba8e5996da, type: 2}
   - {fileID: 11400000, guid: 1490fd2b227d2544eaf96ffae4121c8b, type: 2}

@@ -79,7 +79,7 @@
     flex-direction: row;
     align-items: center;
     color: var(--unity-text);
-    font-size: 15px;
+    font-size: 12px;
 }
 
 .nav-item:hover {
@@ -92,7 +92,7 @@
 }
 
 .section-header {
-    font-size: 15px;
+    font-size: 13px;
     -unity-font-style: bold;
     color: rgb(136, 136, 136);
     padding-left: 5px;
@@ -148,12 +148,13 @@
     border-color: var(--unity-border);
     border-radius: 3px;
     color: white;
-    height: 30px;
+    height: 25px;
     margin-top: 10px;
     margin-right: 10px;
     margin-bottom: 10px;
     margin-left: 10px;
     -unity-font-definition: resource("Fonts/Montserrat-Light");
+    font-size: 12px;
 }
 
 .icon-small {

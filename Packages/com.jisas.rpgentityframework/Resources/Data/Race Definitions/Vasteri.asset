@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0009ecb1db0de2438ee3eaa1aee7a9d, type: 3}
-  m_Name: Vastaya
+  m_Name: Vasteri
   m_EditorClassIdentifier: 
   id: a7566021-97e1-4b62-8aaf-11e0e229c85c
-  icon: {fileID: 0}
-  raceName: Vastaya
+  icon: {fileID: 21300000, guid: 97d833db2efe0014e8492573fcaf3bcb, type: 3}
+  raceName: Vasteri
   description: 
   availableSubRaces:
   - {fileID: 11400000, guid: 6f03c94db7189404fb55c7ba8e5996da, type: 2}

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0009ecb1db0de2438ee3eaa1aee7a9d, type: 3}
   m_Name: Orc
   m_EditorClassIdentifier: 
-  raceName: Orco
+  id: e48ccab0-e16a-4dba-982b-2df68e093c42
+  icon: {fileID: 21300000, guid: 4f99e1b7f3df2ee478ee09e9eaebdc2d, type: 3}
+  raceName: Orc
   description: 
-  icon: {fileID: 0}
-  racialAbilities: []
+  availableSubRaces: []
   availableClasses: []
+  racialAbilities: []

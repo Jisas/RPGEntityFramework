@@ -5,26 +5,29 @@ using UnityEngine.UIElements;
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
+using System.IO;
 
 namespace RPGFramework.Editor
 {
     public class RPGDatabaseEditor : EditorWindow
     {
-        [MenuItem("RPG Framework/Database Editor")]
+        [MenuItem("RPG Entity Framework/Entity Manager")]
         public static void OpenWindow()
         {
             RPGDatabaseEditor wnd = GetWindow<RPGDatabaseEditor>();
-            wnd.titleContent = new GUIContent("RPG Entity Framework");
+            wnd.titleContent = new GUIContent("Entity Manager");
             wnd.minSize = new Vector2(800, 500);
         }
 
         private VisualElement _inspectorContent, _inspectorIcon;
         private Label _inspectorTitle, _inspectorDefinition, _inspectorID;
-        private Button _saveButton, _settingsButton;
+        private Button _createButton, _saveButton, _settingsButton;
         private ListView _itemList;
 
-        private RPGEntityDatabase _database;
         private VisualElement _navbar;
+        private System.Type _currentType; // Para saber qué estamos creando
+        private string _basePath = "Assets/Data/Definitions";
+        private RPGEntityDatabase _database;
 
         // Iconos para el estado Dirty
         private Sprite _saveIconNormal;
@@ -43,6 +46,7 @@ namespace RPGFramework.Editor
             _inspectorID = root.Q<Label>("inspector-id");
             _inspectorDefinition = root.Q<Label>("inspector-definition");
             _itemList = root.Q<ListView>("item-list");
+            _createButton = root.Q<Button>("create-button");
             _navbar = root.Q<VisualElement>("sidebar");
             _saveButton = root.Q<Button>("save-button");
             _settingsButton = root.Q<Button>("settings-button");
@@ -85,6 +89,7 @@ namespace RPGFramework.Editor
         {
             // Lógica de Guardado
             _saveButton.clicked += Save;
+            _createButton.clicked += CreateNewEntity;
 
             // Lógica de Configuración (Sugerencia: Menú contextual)
             _settingsButton.clicked += () =>
@@ -109,21 +114,67 @@ namespace RPGFramework.Editor
             _saveButton.iconImage = Background.FromSprite(_saveIconNormal);
             _saveButton.style.backgroundColor = new StyleColor(StyleKeyword.Null); // Vuelve al color del USS
         }
+
         private void Save()
         {
             if (!_isDirty) return;
 
-            // 1. Forzar el guardado de los assets modificados en disco
+            // 1. Sincronizar nombres de archivos antes de guardar
+            foreach (var item in _itemList.itemsSource)
+            {
+                if (item is ScriptableObject so) SyncFileName(so);
+            }
+
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-
-            // 2. Refrescar la lista para mostrar nombres actualizados si cambiaron
             _itemList.Rebuild();
-
-            // 3. Limpiar estado
             ClearDirty();
 
-            Debug.Log("<color=green>RPG Database: Cambios guardados correctamente.</color>");
+            Debug.Log("Base de datos actualizada y archivos renombrados.");
+        }
+        private void SyncFileName(ScriptableObject so)
+        {
+            string currentPath = AssetDatabase.GetAssetPath(so);
+            string newName = "";
+
+            // Buscamos la variable de nombre según el tipo (esto evita que el SO se llame "New Race")
+            if (so is RaceDefinition r) newName = r.raceName;
+            else if (so is ClassDefinition c) newName = c.className;
+            else if (so is AbilityDefinition a) newName = a.abilityName;
+
+            if (string.IsNullOrEmpty(newName) || so.name == newName) return;
+
+            // Renombrar físicamente el asset
+            string error = AssetDatabase.RenameAsset(currentPath, newName);
+            if (!string.IsNullOrEmpty(error)) Debug.LogError($"Error al renombrar: {error}");
+        }
+
+        private void CreateNewEntity()
+        {
+            if (_currentType == null) return;
+
+            // 1. Definir ruta (Base + Tipo)
+            string folderPath = $"{_basePath}/{_currentType.Name}s";
+            if (!AssetDatabase.IsValidFolder(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+                AssetDatabase.Refresh();
+            }
+
+            // 2. Crear instancia
+            ScriptableObject newAsset = ScriptableObject.CreateInstance(_currentType);
+            string fullPath = AssetDatabase.GenerateUniqueAssetPath($"{folderPath}/New {_currentType.Name}.asset");
+
+            AssetDatabase.CreateAsset(newAsset, fullPath);
+
+            // 3. Registrar en la base de datos principal
+            RegisterInDatabase(newAsset);
+
+            AssetDatabase.SaveAssets();
+            _itemList.Rebuild();
+
+            // Seleccionar el nuevo item automáticamente
+            _itemList.SetSelection(_itemList.itemsSource.Count - 1);
         }
         private void ValidateDatabase()
         {
@@ -138,26 +189,50 @@ namespace RPGFramework.Editor
             else Debug.Log($"Validación completada: {issues} advertencias encontradas.");
         }
 
+        private void RegisterInDatabase(ScriptableObject asset)
+        {
+            if (asset is RaceDefinition r) _database.allRaces.Add(r);
+            else if (asset is SubRaceDefinition sr) _database.allSubRaces.Add(sr);
+            else if (asset is ClassDefinition c) _database.allClasses.Add(c);
+            else if (asset is SubClassDefinition sc) _database.allSubClasses.Add(sc);
+            else if (asset is AttributeDefinition att) _database.allAttributes.Add(att);
+            else if (asset is AbilityDefinition ab) _database.allAbilities.Add(ab);
+
+            EditorUtility.SetDirty(_database);
+        }
         private void RegisterNavButton<T>(string elementName, string title, List<T> source) where T : ScriptableObject
         {
             var btn = rootVisualElement.Q<VisualElement>(elementName);
             btn?.RegisterCallback<ClickEvent>(evt => SelectCategory(title, source, btn));
         }
+
         private void SetupListView()
         {
-            // Cambiamos la carga del template para asegurar que use la ruta correcta
-            VisualTreeAsset template = Resources.Load<VisualTreeAsset>("Templates/ListElementTemplate");
+            _itemList.fixedItemHeight = 30;
+            _itemList.makeItem = () => 
+            {
+                var template = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.jisas.rpgentityframework/Editor/Templates/ListElementTemplate.uxml");
+                return template.Instantiate();
+            };
 
-            _itemList.fixedItemHeight = 35;
-            _itemList.makeItem = () => template.CloneTree();
             _itemList.bindItem = (element, i) =>
             {
                 var item = _itemList.itemsSource[i] as RPGDefinition;
-                element.Q<Label>("name").text = item != null ? item.name : "Null Item";
-                element.Q<VisualElement>("icon").style.backgroundImage = Background.FromSprite(item != null ? item.Icon : null);
+                if (item == null) return;
+
+                element.Q<Label>("name").text = item.name;
+                element.Q<VisualElement>("icon").style.backgroundImage = Background.FromSprite(item.Icon);
+
+                // --- LÓGICA DEL BOTÓN DE BORRADO ---
+                var deleteBtn = element.Q<Button>("delete-btn");
+
+                // Limpiamos acciones previas para evitar ejecuciones múltiples por el reciclaje del ListView
+                deleteBtn.clickable = new Clickable(() => 
+                {
+                    DeleteEntity(item);
+                });
             };
 
-            // FIX: Convertimos a List para evitar el NullReferenceException por cast fallido
             _itemList.selectionChanged += objects =>
             {
                 ShowInInspector(objects.ToList());
@@ -166,12 +241,13 @@ namespace RPGFramework.Editor
         private void SelectCategory<T>(string title, List<T> source, VisualElement targetElement) where T : ScriptableObject
         {
             // 1. Actualizar Datos
+            _currentType = typeof(T); // Guardamos el tipo actual
             _itemList.itemsSource = source;
             _itemList.Rebuild();
             _itemList.ClearSelection(); // Limpiar inspector al cambiar categoría
 
-            var createLabel = rootVisualElement.Q<Label>("create-btn-text");
-            if (createLabel != null) createLabel.text = $"+ New {title}";
+            var createLabel = rootVisualElement.Q<Button>("create-button");
+            createLabel.text = $" New {title}";
 
             // 2. Gestionar Estilo .active
             if (targetElement != null)
@@ -234,6 +310,48 @@ namespace RPGFramework.Editor
                 _inspectorIcon.style.backgroundImage = Background.FromSprite(rpgData.Icon);
                 _inspectorID.text = $"ID: {rpgData.Id}";
             }
+        }
+
+        private void DeleteEntity(RPGDefinition item)
+        {
+            if (item == null) return;
+
+            // 1. Cuadro de confirmación
+            string mensaje = $"Are you sure you want to permanently delete ‘{item.name}’?\n\nThis action will delete the file and remove it from the database.";
+            if (!EditorUtility.DisplayDialog("Delete Definition", mensaje, "Delete", "Cancel"))
+            {
+                return;
+            }
+
+            // 2. Eliminar de la lista de la Base de Datos
+            RemoveFromDatabase(item);
+
+            // 3. Eliminar el archivo físico
+            string path = AssetDatabase.GetAssetPath(item);
+            if (!string.IsNullOrEmpty(path))
+            {
+                AssetDatabase.DeleteAsset(path);
+            }
+
+            // 4. Guardar cambios en la base de datos y refrescar
+            EditorUtility.SetDirty(_database);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+
+            // 5. Refrescar la UI
+            _itemList.Rebuild();
+            _inspectorContent.Clear();
+            _inspectorTitle.text = "No selection";
+        }
+        private void RemoveFromDatabase(RPGDefinition item)
+        {
+            // Dependiendo del tipo, lo quitamos de su lista correspondiente
+            if (item is RaceDefinition r) _database.allRaces.Remove(r);
+            else if (item is ClassDefinition c) _database.allClasses.Remove(c);
+            else if (item is AbilityDefinition a) _database.allAbilities.Remove(a);
+            else if (item is SubRaceDefinition sr) _database.allSubRaces.Remove(sr);
+            else if (item is SubClassDefinition sc) _database.allSubClasses.Remove(sc);
+            else if (item is AttributeDefinition attr) _database.allAttributes.Remove(attr);
         }
     }
 }

@@ -1,7 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/ListElementTemplate_Style.uss?fileID=7433441132597879392&amp;guid=f8ba8a81b9591cb43a6542df96cce7d5&amp;type=3#ListElementTemplate_Style"/>
-    <ui:VisualElement class="template-base">
-        <ui:VisualElement name="icon" class="template-icon" style="background-image: resource(&quot;Icons/zap&quot;); -unity-background-scale-mode: scale-to-fit; background-size: 60% 60%;"/>
-        <ui:Label text="Label" name="name" class="template-name"/>
-    </ui:VisualElement>
-</ui:UXML>

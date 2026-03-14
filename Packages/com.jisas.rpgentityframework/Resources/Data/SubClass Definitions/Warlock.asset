@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 480994e9513658846b55cf1492573b2a, type: 3}
   m_Name: Warlock
   m_EditorClassIdentifier: 
-  subClassName: Guerrero oscuro
-  description: 
+  id: cec6ed0e-2140-4f25-a053-33e8d27bf05d
   icon: {fileID: 0}
+  subClassName: Warlock
+  description: 

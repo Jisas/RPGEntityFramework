@@ -10,11 +10,12 @@
     flex-grow: initial;
     width: 35px;
     height: 35px;
+    background-size: 50% 50%;
 }
 
 .template-name {
     -unity-font-definition: resource("Fonts/Montserrat-Light");
-    font-size: 15px;
+    font-size: 12px;
     -unity-text-align: middle-left;
     color: rgb(255, 255, 255);
     margin-left: 0;
@@ -25,4 +26,26 @@
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
+}
+
+.template-btn {
+    width: 20px;
+    height: 20px;
+    align-self: center;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    margin-top: 0;
+    margin-right: 10px;
+    margin-bottom: 0;
+    margin-left: 10px;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
 }

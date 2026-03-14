@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 480994e9513658846b55cf1492573b2a, type: 3}
   m_Name: LightPaladin
   m_EditorClassIdentifier: 
-  subClassName: Paladin de la luz
-  description: 
+  id: 1a98e171-8150-49c6-b741-245b9a678fe9
   icon: {fileID: 0}
+  subClassName: Light Paladin
+  description: 
