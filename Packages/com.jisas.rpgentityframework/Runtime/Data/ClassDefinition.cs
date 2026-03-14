@@ -6,14 +6,13 @@ namespace RPGEntityFramework.Data
     [CreateAssetMenu(fileName = "ClassDefinition", menuName = "RPG Entity Framework/Class Definition")]
     public class ClassDefinition : RPGDefinition
     {
-        [Header("Datos Básicos")]
         public string className;
         [TextArea] public string description;
 
-        [Header("Atributos Base")]
+        [Header("Base Attributes")]
         public List<AttributeValue> baseAttributes;
 
-        [Header("Subclases Disponibles")]
+        [Header("Available Sub-Classes")]
         public List<SubClassDefinition> availableSubClasses;
     }
 }

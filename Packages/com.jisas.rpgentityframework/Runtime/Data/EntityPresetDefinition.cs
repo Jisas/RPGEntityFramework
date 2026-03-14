@@ -6,11 +6,12 @@ using UnityEngine;
 public class EntityPresetDefinition : RPGDefinition
 {
     public string characterName;
+    [Space(10)]
     public RaceDefinition race;
     public SubRaceDefinition subRace;
     public ClassDefinition classDef;
     public SubClassDefinition subClass;
+    [Space(10)]
     public List<AttributeValue> attributes;
     public List<AbilityDefinition> extraAbilities;
-    // Puedes añadir campos para equipamiento inicial, nivel, aspecto visual, etc.
 }

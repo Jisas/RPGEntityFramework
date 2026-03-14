@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4b74e6148d0955489a704c19a2ce867, type: 3}
   m_Name: Paladin
   m_EditorClassIdentifier: 
+  id: 4d2511e3-7570-4dac-94cc-2183220cc477
+  icon: {fileID: 0}
   className: Paladin
   description: 
-  icon: {fileID: 0}
+  baseAttributes: []
   availableSubClasses:
   - {fileID: 11400000, guid: 0c6bbf1b359508546b6abd879745df6e, type: 2}
   - {fileID: 11400000, guid: 71941d7b179a50f4c99712ee830daab7, type: 2}

@@ -6,15 +6,14 @@ namespace RPGEntityFramework.Data
     [CreateAssetMenu(fileName = "RaceDefinition", menuName = "RPG Entity Framework/Race Definition")]
     public class RaceDefinition : RPGDefinition
     {
-        [Header("General")]
         public string raceName;
         [TextArea] public string description;
 
-        [Header("Herencias permitidas")]
+        [Header("Available Inheritances")]
         public List<SubRaceDefinition> availableSubRaces;
         public List<ClassDefinition> availableClasses;
 
-        [Header("Habilidades Raciales")]
+        [Header("Racial Abilities")]
         public List<AbilityDefinition> racialAbilities = new();
     }
 }

@@ -42,18 +42,18 @@
                         <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/zap&quot;);"/>
                         <ui:Label text="Abilities" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
                     </ui:VisualElement>
+                    <ui:VisualElement name="nav-presets" class="nav-item">
+                        <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/file-text&quot;);"/>
+                        <ui:Label text="Presets" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                    </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:Label text="TOOLS" name="header" class="section-header margin-top-20"/>
-                <ui:VisualElement name="nav-presets" class="nav-item">
-                    <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/file-text&quot;);"/>
-                    <ui:Label text="Presets" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
-                </ui:VisualElement>
                 <ui:VisualElement name="nav-test" class="nav-item text-yellow">
                     <ui:VisualElement class="icon-hammer icon-small" style="background-image: resource(&quot;Icons/hammer&quot;);"/>
                     <ui:Label text="Test Builder" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="list-column" class="border-right w-64 bg-dark" style="width: 23%; min-width: 200px;">
+            <ui:VisualElement name="list-column" class="border-right w-64 bg-dark" style="width: 23%;">
                 <ui:VisualElement name="search-container" class="border-bottom p-2" style="height: 50px; justify-content: center;">
                     <ui:TextField name="search-field" placeholder-text=" Search..." class="unity-input" style="height: 32px;"/>
                 </ui:VisualElement>
@@ -62,11 +62,11 @@
                     <ui:Button name="create-button" icon-image="project://database/Packages/com.jisas.rpgentityframework/Resources/Icons/plus.png?fileID=21300000&amp;guid=2c3a93a669ba65444ac4c78c08b4000a&amp;type=3#plus" text="New" class="unity-button expand" style="margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 35px; -unity-font-definition: resource(&quot;Fonts/Montserrat-Medium&quot;); color: rgb(255, 255, 255); font-size: 12px;"/>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="inspector-place-holder" style="flex-grow: 1; justify-content: center; align-items: center;">
-                <ui:VisualElement style="flex-grow: initial; background-image: resource(&quot;Icons/square-dashed&quot;); width: 60px; height: 60px; -unity-background-image-tint-color: rgb(75, 83, 89); -unity-background-scale-mode: scale-to-fit;"/>
-                <ui:Label text="Select an item to edit" class="text-muted" style="-unity-text-align: middle-center; color: rgb(113, 130, 142); font-size: 20px; -unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+            <ui:VisualElement name="inspector-place-holder" style="flex-grow: 1; justify-content: center; align-items: center; display: flex; width: 57%;">
+                <ui:VisualElement style="flex-grow: initial; background-image: resource(&quot;Icons/square-dashed&quot;); width: 40px; height: 40px; -unity-background-image-tint-color: rgb(75, 83, 89); -unity-background-scale-mode: scale-to-fit;"/>
+                <ui:Label text="Select an item to edit" class="text-muted" style="-unity-text-align: middle-center; color: rgb(113, 130, 142); font-size: 15px; -unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;); margin-top: 10px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
             </ui:VisualElement>
-            <ui:ScrollView name="inspector-column" horizontal-scroller-visibility="Hidden" class="expand bg-inspector" style="display: none;">
+            <ui:ScrollView name="inspector-column" horizontal-scroller-visibility="Hidden" class="expand bg-inspector" style="display: none; width: 57%;">
                 <ui:VisualElement name="inspector-header" class="border-bottom-light bg-darker row justify-between" style="justify-content: space-between; display: flex;">
                     <ui:VisualElement class="row items-center">
                         <ui:VisualElement name="" class="icon-big margin-right" style="align-items: center; justify-content: center;">

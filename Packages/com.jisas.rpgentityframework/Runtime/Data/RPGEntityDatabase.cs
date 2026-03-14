@@ -11,6 +11,7 @@ public class RPGEntityDatabase : ScriptableObject
     public List<SubClassDefinition> allSubClasses;
     public List<AttributeDefinition> allAttributes;
     public List<AbilityDefinition> allAbilities;
+    public List<EntityPresetDefinition> allPresets;
 
     private Dictionary<string, RPGDefinition> _idLookup;
 
@@ -40,6 +41,7 @@ public class RPGEntityDatabase : ScriptableObject
         RegisterList(allSubClasses);
         RegisterList(allAttributes);
         RegisterList(allAbilities);
+        RegisterList(allPresets);
     }
     public T GetDefinitionById<T>(string id) where T : RPGDefinition
     {

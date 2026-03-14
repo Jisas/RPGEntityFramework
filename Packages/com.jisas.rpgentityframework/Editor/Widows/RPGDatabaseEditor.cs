@@ -27,7 +27,7 @@ namespace RPGFramework.Editor
 
         private VisualElement _navbar;
         private System.Type _currentType; // Para saber qué estamos creando
-        private string _basePath = "Assets/Data/Definitions";
+        private string _basePath = "Packages/com.jisas.rpgentityframework/Resources/Data/Definitions";
         private RPGEntityDatabase _database;
 
         // Iconos para el estado Dirty
@@ -82,6 +82,7 @@ namespace RPGFramework.Editor
             RegisterNavButton("nav-subclasses", "Sub-Class", _database.allSubClasses);
             RegisterNavButton("nav-attributes", "Attribute", _database.allAttributes);
             RegisterNavButton("nav-abilities", "Ability", _database.allAbilities);
+            RegisterNavButton("nav-presets", "Preset", _database.allPresets);
 
             // Carga inicial (marcando el primero como activo)
             var initialBtn = root.Q<VisualElement>("nav-races");
@@ -136,17 +137,21 @@ namespace RPGFramework.Editor
 
             Debug.Log("Base de datos actualizada y archivos renombrados.");
         }
-        private void SyncFileName(ScriptableObject so)
+        private void SyncFileName(ScriptableObject asset)
         {
-            string currentPath = AssetDatabase.GetAssetPath(so);
+            string currentPath = AssetDatabase.GetAssetPath(asset);
             string newName = "";
 
             // Buscamos la variable de nombre según el tipo (esto evita que el SO se llame "New Race")
-            if (so is RaceDefinition r) newName = r.raceName;
-            else if (so is ClassDefinition c) newName = c.className;
-            else if (so is AbilityDefinition a) newName = a.abilityName;
+            if (asset is RaceDefinition r) newName = r.raceName;
+            else if (asset is SubRaceDefinition sr) newName = sr.subRaceName;
+            else if (asset is ClassDefinition c) newName = c.className;
+            else if (asset is SubClassDefinition sc) newName = sc.subClassName;
+            else if (asset is AttributeDefinition attr) newName = attr.attributeName;
+            else if (asset is AbilityDefinition abty) newName = abty.abilityName;
+            else if (asset is EntityPresetDefinition ep) newName = ep.characterName;
 
-            if (string.IsNullOrEmpty(newName) || so.name == newName) return;
+            if (string.IsNullOrEmpty(newName) || asset.name == newName) return;
 
             // Renombrar físicamente el asset
             string error = AssetDatabase.RenameAsset(currentPath, newName);
@@ -201,6 +206,7 @@ namespace RPGFramework.Editor
             else if (asset is SubClassDefinition sc) _database.allSubClasses.Add(sc);
             else if (asset is AttributeDefinition att) _database.allAttributes.Add(att);
             else if (asset is AbilityDefinition ab) _database.allAbilities.Add(ab);
+            else if (asset is EntityPresetDefinition ep) _database.allPresets.Add(ep);
 
             EditorUtility.SetDirty(_database);
         }

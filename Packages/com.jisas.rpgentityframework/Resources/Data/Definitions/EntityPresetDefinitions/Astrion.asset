@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08e4e43f030248c49a87eceb6887b411, type: 3}
-  m_Name: NewEntity
+  m_Name: Astrion
   m_EditorClassIdentifier: RPGEntityFramework.Runtime::EntityPresetDefinition
-  id: 
-  characterName: 
+  id: 0d63dae7-56ad-4c73-990b-7820b0cf5076
+  icon: {fileID: 0}
+  characterName: Astrion
   race: {fileID: 0}
   subRace: {fileID: 0}
   classDef: {fileID: 0}
