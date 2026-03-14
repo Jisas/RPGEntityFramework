@@ -3,12 +3,11 @@ using UnityEngine;
 
 namespace RPGEntityFramework.Data
 {
-    [CreateAssetMenu(menuName = "RPG Framework/Ability Definition")]
+    [CreateAssetMenu(menuName = "RPG Entity Framework/Ability Definition")]
     public class AbilityDefinition : RPGDefinition
     {
         public string abilityName;
         [TextArea] public string description;
-        public Sprite icon;
 
         [Header("Caracteristicas de la Habilidad")]
         public DamageTypeDefinition damageType;

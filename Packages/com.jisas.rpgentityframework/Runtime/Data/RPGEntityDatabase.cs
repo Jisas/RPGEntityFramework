@@ -21,7 +21,7 @@ public class RPGEntityDatabase : ScriptableObject
         {
             if (_instance == null)
             {
-                _instance = Resources.Load<RPGEntityDatabase>("RPGDatabase");
+                _instance = Resources.Load<RPGEntityDatabase>("Data/EntityDatabase");
                 if (_instance == null)
                     Debug.LogError("No se encontró el asset RPGDatabase en la carpeta Resources.");
             }

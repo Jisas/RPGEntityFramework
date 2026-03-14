@@ -7,6 +7,6 @@ namespace RPGEntityFramework.Data
     {
         public string damageTypeName;
         [TextArea] public string description;
-        public Sprite icon;
+
     }
 }

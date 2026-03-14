@@ -8,6 +8,5 @@ namespace RPGEntityFramework.Data
         [Header("Datos Básicos")]
         public string subClassName;
         [TextArea] public string description;
-        public Sprite icon;
     }
 }

@@ -14,10 +14,3 @@ public class EntityPresetDefinition : RPGDefinition
     public List<AbilityDefinition> extraAbilities;
     // Puedes añadir campos para equipamiento inicial, nivel, aspecto visual, etc.
 }
-
-[System.Serializable]
-public class AttributeValue
-{
-    public AttributeDefinition attribute;
-    public float value;
-}

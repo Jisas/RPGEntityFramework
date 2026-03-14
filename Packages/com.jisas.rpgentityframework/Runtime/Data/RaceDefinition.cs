@@ -9,7 +9,6 @@ namespace RPGEntityFramework.Data
         [Header("General")]
         public string raceName;
         [TextArea] public string description;
-        public Sprite icon;
 
         [Header("Herencias permitidas")]
         public List<SubRaceDefinition> availableSubRaces;

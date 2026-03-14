@@ -1,0 +1,86 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/RGPEntityWindow_Style.uss?fileID=7433441132597879392&amp;guid=7b4ac743a1328e249aff33624ddf0e6d&amp;type=3#RGPEntityWindow_Style"/>
+    <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/ListElementTemplate_Style.uss?fileID=7433441132597879392&amp;guid=f8ba8a81b9591cb43a6542df96cce7d5&amp;type=3#ListElementTemplate_Style"/>
+    <ui:VisualElement name="root">
+        <ui:VisualElement name="toolbar" class="unity-panel border-bottom" style="flex-direction: row; justify-content: space-between; height: 40px;">
+            <ui:VisualElement class="row items-center">
+                <ui:VisualElement name="logo" class="icon-shield margin-right icon-small"/>
+                <ui:Label text="RPG Entity Framework" class="bold text-white" style="-unity-text-generator: advanced; -unity-font-style: normal;"/>
+            </ui:VisualElement>
+            <ui:VisualElement class="row items-center">
+                <ui:Button name="save-button" icon-image="project://database/Packages/com.jisas.rpgentityframework/Resources/Icons/file-text.png?fileID=21300000&amp;guid=52f1b4b4870ebfb478b20e5d2074fe92&amp;type=3#file-text" class="unity-button" style="height: 25px;">
+                    <ui:Label text="Save Data" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Medium&quot;);"/>
+                </ui:Button>
+                <ui:Button name="settings-button" icon-image="project://database/Packages/com.jisas.rpgentityframework/Resources/Icons/settings.png?fileID=21300000&amp;guid=7cae749583eb32d46b5607b21d13af0b&amp;type=3#settings" class="unity-button icon-settings" style="padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px; width: 50px; height: 25px;"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="workspace" class="row expand">
+            <ui:VisualElement name="nav-column" class="unity-panel border-right w-48 py-2" style="width: 20%; min-width: 200px;">
+                <ui:Label text="DATABASE" class="section-header"/>
+                <ui:VisualElement name="nav-menu">
+                    <ui:VisualElement name="nav-races" class="nav-item">
+                        <ui:VisualElement class="icon-small" style="background-image: resource(&quot;Icons/users&quot;);"/>
+                        <ui:Label text="Races" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="nav-subraces" class="nav-item">
+                        <ui:VisualElement class="icon-network icon-small" style="background-image: resource(&quot;Icons/network&quot;);"/>
+                        <ui:Label text="Sub-Races" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="nav-classes" class="nav-item">
+                        <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/network&quot;);"/>
+                        <ui:Label text="Classes" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="nav-subclasses" class="nav-item">
+                        <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/git-merge&quot;);"/>
+                        <ui:Label text="Sub-Classes" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="nav-attributes" class="nav-item">
+                        <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/chart-no-axes-column&quot;);"/>
+                        <ui:Label text="Attributes" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="nav-abilities" class="nav-item">
+                        <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/zap&quot;);"/>
+                        <ui:Label text="Abilities" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Label text="TOOLS" class="section-header margin-top-20"/>
+                <ui:VisualElement name="nav-presets" class="nav-item">
+                    <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/file-text&quot;);"/>
+                    <ui:Label text="Presets" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="nav-test" class="nav-item text-yellow">
+                    <ui:VisualElement class="icon-hammer icon-small" style="background-image: resource(&quot;Icons/hammer&quot;);"/>
+                    <ui:Label text="Test Builder" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="list-column" class="border-right w-64 bg-dark" style="width: 25%; min-width: 270px;">
+                <ui:VisualElement name="search-container" class="border-bottom p-2" style="height: 60px; justify-content: center;">
+                    <ui:TextField name="search-field" placeholder-text=" Search..." class="unity-input" style="height: 32px;"/>
+                </ui:VisualElement>
+                <ui:ListView name="item-list" fixed-item-height="24" class="expand"/>
+                <ui:VisualElement name="footer" class="unity-panel border-top p-2">
+                    <ui:Button name="create-button" class="unity-button expand" style="margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 35px;">
+                        <ui:Label name="create-btn-text" text="+ Nueva Raza" style="flex-grow: 1; font-size: 15px; -unity-font-definition: resource(&quot;Fonts/Montserrat-Medium&quot;);"/>
+                    </ui:Button>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:ScrollView name="inspector-column" class="expand bg-inspector">
+                <ui:VisualElement name="inspector-header" class="border-bottom-light bg-darker row justify-between" style="justify-content: space-between;">
+                    <ui:VisualElement class="row items-center">
+                        <ui:VisualElement name="" class="icon-big margin-right" style="align-items: center; justify-content: center;">
+                            <ui:VisualElement name="inspector-icon" style="background-image: none; width: 30px; height: 30px;"/>
+                        </ui:VisualElement>
+                        <ui:VisualElement style="padding-left: 10px; height: 45px; justify-content: space-between;">
+                            <ui:Label name="inspector-title" text="No selection" class="bold text-lg text-white" style="-unity-text-generator: advanced; -unity-font-style: normal;"/>
+                            <ui:Label text="No selection" name="inspector-definition" class="text-muted text-xs"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 0; width: 155px; overflow: visible; margin-right: 10px;">
+                        <ui:Label text="ID: gbgfhjghjghjghjghjghjghjghjghjghj" name="inspector-id" class="text-muted" style="flex-grow: 1; -unity-text-align: middle-left; text-overflow: ellipsis; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; overflow: hidden;"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="inspector-content" style="flex-grow: 1; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;"/>
+            </ui:ScrollView>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

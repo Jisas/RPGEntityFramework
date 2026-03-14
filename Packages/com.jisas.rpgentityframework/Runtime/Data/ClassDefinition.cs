@@ -3,13 +3,15 @@ using UnityEngine;
 
 namespace RPGEntityFramework.Data
 {
-    [CreateAssetMenu(fileName = "ClassDefinition", menuName = "RPG entity Framework/Class Definition")]
+    [CreateAssetMenu(fileName = "ClassDefinition", menuName = "RPG Entity Framework/Class Definition")]
     public class ClassDefinition : RPGDefinition
     {
         [Header("Datos Básicos")]
         public string className;
         [TextArea] public string description;
-        public Sprite icon;
+
+        [Header("Atributos Base")]
+        public List<AttributeValue> baseAttributes;
 
         [Header("Subclases Disponibles")]
         public List<SubClassDefinition> availableSubClasses;

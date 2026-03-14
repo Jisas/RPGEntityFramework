@@ -5,10 +5,11 @@ namespace RPGEntityFramework.Data
 {
     public class RPGDefinition : ScriptableObject
     {
-        [SerializeField, HideInInspector]
-        private string id;
+        [SerializeField, HideInInspector] private string id;
+        [SerializeField] private Sprite icon;
 
         public string Id => id;
+        public Sprite Icon => icon;
 
         // Se ejecuta cuando el script se carga o se cambia un valor en el inspector
         protected virtual void OnValidate()
