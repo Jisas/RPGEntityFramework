@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7911e71bf47eb904c8e24c36c904002f, type: 3}
-  m_Name: GenericDamage
+  m_Name: Generic
   m_EditorClassIdentifier: 
   id: 33ba35fc-4a63-4815-8ac2-384c49d727aa
   abilityName: Generic

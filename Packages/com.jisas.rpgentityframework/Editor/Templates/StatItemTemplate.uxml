@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/RGPEntityWindow_Style.uss?fileID=7433441132597879392&amp;guid=7b4ac743a1328e249aff33624ddf0e6d&amp;type=3#RGPEntityWindow_Style"/>
+    <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/TestBuilderTemplate_Style.uss?fileID=7433441132597879392&amp;guid=5dae0104a295a254da17647ecab2177e&amp;type=3#TestBuilderTemplate_Style"/>
+    <ui:VisualElement name="stat-item" style="flex-grow: 1;">
+        <ui:VisualElement class="stat-header">
+            <ui:Label text="Stat Name" class="text-xs text-muted"/>
+            <ui:Label text="18 (+3)" class="text-xs text-white bold"/>
+        </ui:VisualElement>
+        <ui:VisualElement class="stat-bar">
+            <ui:VisualElement class="stat-fill" style="width: 70%;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

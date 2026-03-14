@@ -1,11 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Template name="TestBuilderTemplate" src="project://database/Packages/com.jisas.rpgentityframework/Editor/Templates/TestBuilderTemplate.uxml?fileID=9197481963319205126&amp;guid=13eb35538a4cd7046a213fc0a2a09fa0&amp;type=3#TestBuilderTemplate"/>
     <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/RGPEntityWindow_Style.uss?fileID=7433441132597879392&amp;guid=7b4ac743a1328e249aff33624ddf0e6d&amp;type=3#RGPEntityWindow_Style"/>
     <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/ListElementTemplate_Style.uss?fileID=7433441132597879392&amp;guid=f8ba8a81b9591cb43a6542df96cce7d5&amp;type=3#ListElementTemplate_Style"/>
+    <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/TestBuilderTemplate_Style.uss?fileID=7433441132597879392&amp;guid=5dae0104a295a254da17647ecab2177e&amp;type=3#TestBuilderTemplate_Style"/>
     <ui:VisualElement name="root">
         <ui:VisualElement name="toolbar" class="unity-panel border-bottom" style="flex-direction: row; justify-content: space-between; height: 40px;">
             <ui:VisualElement class="row items-center">
-                <ui:VisualElement name="logo" class="icon-shield margin-right icon-small"/>
-                <ui:Label text="RPG Entity Framework" class="bold text-white" style="-unity-text-generator: advanced; -unity-font-style: normal;"/>
+                <ui:VisualElement name="logo" class="icon-shield margin-right icon-small" style="background-image: resource(&quot;Icons/grid&quot;); -unity-background-scale-mode: scale-to-fit; width: 25px; height: 25px;"/>
+                <ui:Label text="RPG Entity Framework" class="bold text-white" style="-unity-text-generator: advanced; -unity-font-style: normal; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
             </ui:VisualElement>
             <ui:VisualElement class="row items-center">
                 <ui:Button name="save-button" icon-image="project://database/Packages/com.jisas.rpgentityframework/Resources/Icons/file-text.png?fileID=21300000&amp;guid=52f1b4b4870ebfb478b20e5d2074fe92&amp;type=3#file-text" class="unity-button" style="height: 25px;">
@@ -17,35 +19,33 @@
         <ui:VisualElement name="workspace" class="row expand">
             <ui:VisualElement name="nav-column" class="unity-panel border-right w-48 py-2" style="width: 20%; min-width: 200px;">
                 <ui:Label text="DATABASE" name="header" class="section-header"/>
-                <ui:VisualElement name="nav-menu">
-                    <ui:VisualElement name="nav-races" class="nav-item">
-                        <ui:VisualElement class="icon-small" style="background-image: resource(&quot;Icons/users&quot;);"/>
-                        <ui:Label text="Races" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
-                    </ui:VisualElement>
-                    <ui:VisualElement name="nav-subraces" class="nav-item">
-                        <ui:VisualElement class="icon-network icon-small" style="background-image: resource(&quot;Icons/network&quot;);"/>
-                        <ui:Label text="Sub-Races" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
-                    </ui:VisualElement>
-                    <ui:VisualElement name="nav-classes" class="nav-item">
-                        <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/swords&quot;);"/>
-                        <ui:Label text="Classes" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
-                    </ui:VisualElement>
-                    <ui:VisualElement name="nav-subclasses" class="nav-item">
-                        <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/git-merge&quot;);"/>
-                        <ui:Label text="Sub-Classes" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
-                    </ui:VisualElement>
-                    <ui:VisualElement name="nav-attributes" class="nav-item">
-                        <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/chart-no-axes-column&quot;);"/>
-                        <ui:Label text="Attributes" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
-                    </ui:VisualElement>
-                    <ui:VisualElement name="nav-abilities" class="nav-item">
-                        <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/zap&quot;);"/>
-                        <ui:Label text="Abilities" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
-                    </ui:VisualElement>
-                    <ui:VisualElement name="nav-presets" class="nav-item">
-                        <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/file-text&quot;);"/>
-                        <ui:Label text="Presets" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
-                    </ui:VisualElement>
+                <ui:VisualElement name="nav-races" class="nav-item">
+                    <ui:VisualElement class="icon-small" style="background-image: resource(&quot;Icons/users&quot;);"/>
+                    <ui:Label text="Races" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="nav-subraces" class="nav-item">
+                    <ui:VisualElement class="icon-network icon-small" style="background-image: resource(&quot;Icons/network&quot;);"/>
+                    <ui:Label text="Sub-Races" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="nav-classes" class="nav-item">
+                    <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/swords&quot;);"/>
+                    <ui:Label text="Classes" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="nav-subclasses" class="nav-item">
+                    <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/git-merge&quot;);"/>
+                    <ui:Label text="Sub-Classes" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="nav-attributes" class="nav-item">
+                    <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/chart-no-axes-column&quot;);"/>
+                    <ui:Label text="Attributes" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="nav-abilities" class="nav-item">
+                    <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/zap&quot;);"/>
+                    <ui:Label text="Abilities" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="nav-presets" class="nav-item">
+                    <ui:VisualElement class="icon-swords icon-small" style="background-image: resource(&quot;Icons/file-text&quot;);"/>
+                    <ui:Label text="Presets" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
                 </ui:VisualElement>
                 <ui:Label text="TOOLS" name="header" class="section-header margin-top-20"/>
                 <ui:VisualElement name="nav-test" class="nav-item text-yellow">
@@ -53,7 +53,7 @@
                     <ui:Label text="Test Builder" style="-unity-font-definition: resource(&quot;Fonts/Montserrat-Light&quot;);"/>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="list-column" class="border-right w-64 bg-dark" style="width: 23%;">
+            <ui:VisualElement name="list-column" class="border-right w-64 bg-dark" style="width: 23%; display: flex;">
                 <ui:VisualElement name="search-container" class="border-bottom p-2" style="height: 50px; justify-content: center;">
                     <ui:TextField name="search-field" placeholder-text=" Search..." class="unity-input" style="height: 32px;"/>
                 </ui:VisualElement>
@@ -83,6 +83,9 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="inspector-content" style="flex-grow: 1; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; display: flex;"/>
             </ui:ScrollView>
+            <ui:VisualElement name="test-builder-container" style="flex-grow: 1; display: none;">
+                <ui:Instance template="TestBuilderTemplate" name="TestBuilderTemplate"/>
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

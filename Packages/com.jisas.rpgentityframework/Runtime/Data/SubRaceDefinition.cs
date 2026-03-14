@@ -10,7 +10,7 @@ namespace RPGEntityFramework.Data
         [TextArea] public string description;
 
         [Header("Sub-Race Bonuses")]
-        public List<AbilityDefinition> subRacialAbilities;
         public List<AttributeValue> bonusAttributes;
+        public List<AbilityDefinition> subRacialAbilities;
     }
 }

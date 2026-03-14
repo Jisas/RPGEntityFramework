@@ -1,0 +1,52 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/RGPEntityWindow_Style.uss?fileID=7433441132597879392&amp;guid=7b4ac743a1328e249aff33624ddf0e6d&amp;type=3#RGPEntityWindow_Style"/>
+    <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/TestBuilderTemplate_Style.uss?fileID=7433441132597879392&amp;guid=5dae0104a295a254da17647ecab2177e&amp;type=3#TestBuilderTemplate_Style"/>
+    <ui:ScrollView name="test-builder-root" class="test-builder-container">
+        <ui:VisualElement name="test-header" class="test-header">
+            <ui:VisualElement>
+                <ui:Label text="🧪 Test Builder &amp; Validator" class="bold text-lg text-white"/>
+                <ui:Label text="Simulate configurations and verify data integrity." class="text-xs text-muted"/>
+            </ui:VisualElement>
+            <ui:Button text="Run Full Database Scan" name="btn-run-scan" icon-image="project://database/Packages/com.jisas.rpgentityframework/Resources/Icons/scan-search.png?fileID=21300000&amp;guid=bce218fb78bbfb74a89900eec15e27c0&amp;type=3#scan-search" class="unity-button text-white" style="font-size: 13px;"/>
+        </ui:VisualElement>
+        <ui:VisualElement class="test-body">
+            <ui:VisualElement class="test-col-left">
+                <ui:VisualElement name="" class="unity-panel test-panel" style="justify-content: flex-start; flex-grow: initial;">
+                    <ui:Label text="CHARACTER SETUP" class="panel-title"/>
+                    <ui:DropdownField label="Race" name="dropdown-race" choices="Human,Elf,Orc" class="test-dropdown"/>
+                    <ui:DropdownField label="Sub-Race" name="dropdown-subrace" choices="Human,Elf,Orc" class="test-dropdown"/>
+                    <ui:DropdownField label="Class" name="dropdown-class" choices="Warrior,Mage,Rogue" class="test-dropdown"/>
+                    <ui:DropdownField label="Sub-Class" name="dropdown-subclass" choices="None,Berserker,Paladin" class="test-dropdown"/>
+                    <ui:Button text="Recalculate Stats" name="btn-recalculate" class="btn-primary"/>
+                </ui:VisualElement>
+                <ui:VisualElement class="unity-panel test-panel" style="flex-grow: 1;">
+                    <ui:Label text="QUICK PRESETS" class="panel-title"/>
+                    <ui:VisualElement style="flex-grow: 1;">
+                        <ui:VisualElement class="bg-dark log-item" style="border-left-width: 0; padding: 6px; cursor: link;">
+                            <ui:Label text="🟢 Level 1 Starter Warrior" class="text-xs text-white"/>
+                        </ui:VisualElement>
+                        <ui:VisualElement class="bg-dark log-item" style="border-left-width: 0; padding: 6px; cursor: link;">
+                            <ui:Label text="🟣 Endgame Boss Variant" class="text-xs text-white"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="test-col-right">
+                <ui:VisualElement class="unity-panel test-panel" style="flex-grow: initial;">
+                    <ui:Label text="CALCULATED ATTRIBUTES" class="panel-title"/>
+                    <ui:VisualElement name="stats-container" class="stat-grid"/>
+                </ui:VisualElement>
+                <ui:VisualElement class="unity-panel test-panel" style="flex-grow: 1;">
+                    <ui:VisualElement style="flex-direction: row; justify-content: space-between; margin-bottom: 12px;">
+                        <ui:Label text="INTEGRITY REPORT" class="panel-title" style="margin-bottom: 0;"/>
+                        <ui:VisualElement style="flex-grow: initial; flex-direction: row; justify-content: flex-end;">
+                            <ui:Label text="0 Issues found" name="issues-foud-label" class="badge-error" style="display: none;"/>
+                            <ui:Button text="Clear" name="clear-console-btn" class="text-white" style="font-size: 12px;"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="integrity-log-container" style="flex-grow: initial;"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
+</ui:UXML>

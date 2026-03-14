@@ -97,9 +97,9 @@ namespace RPGFramework.Builders
             }
 
             _model.ClassDef = classDef;
-            if (classDef.baseAttributes != null)
+            if (classDef.bonusAttributes != null)
             {
-                foreach (var attr in classDef.baseAttributes)
+                foreach (var attr in classDef.bonusAttributes)
                     AddAttributeValue(attr.attribute, attr.value);
             }
 

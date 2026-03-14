@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0640a3ea762c20c459a4f30f820b5f0a, type: 3}
-  m_Name: New SubRaceDefinition
-  m_EditorClassIdentifier: RPGEntityFramework.Runtime::RPGEntityFramework.Data.SubRaceDefinition
-  id: fbc125e8-3355-415a-882b-4eb3c86396a2
+  m_Script: {fileID: 11500000, guid: e4b74e6148d0955489a704c19a2ce867, type: 3}
+  m_Name: Mage
+  m_EditorClassIdentifier: RPGEntityFramework.Runtime::RPGEntityFramework.Data.ClassDefinition
+  id: 90eee371-395e-4d23-9fbc-8acf9f48ffe1
   icon: {fileID: 0}
-  subRaceName: Bird
+  className: Mage
   description: 
-  subRacialAbilities: []
   bonusAttributes: []
+  availableSubClasses: []

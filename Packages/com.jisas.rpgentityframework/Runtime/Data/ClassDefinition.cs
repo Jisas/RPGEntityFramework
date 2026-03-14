@@ -9,8 +9,8 @@ namespace RPGEntityFramework.Data
         public string className;
         [TextArea] public string description;
 
-        [Header("Base Attributes")]
-        public List<AttributeValue> baseAttributes;
+        [Header("Bonus Attributes")]
+        public List<AttributeValue> bonusAttributes;
 
         [Header("Available Sub-Classes")]
         public List<SubClassDefinition> availableSubClasses;

@@ -9,6 +9,9 @@ namespace RPGEntityFramework.Data
         public string raceName;
         [TextArea] public string description;
 
+        [Header("Base Attributes")]
+        public List<AttributeValue> baseAttributes;
+
         [Header("Available Inheritances")]
         public List<SubRaceDefinition> availableSubRaces;
         public List<ClassDefinition> availableClasses;

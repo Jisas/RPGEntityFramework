@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPGEntityFramework.Data
@@ -7,5 +8,8 @@ namespace RPGEntityFramework.Data
     {
         public string subClassName;
         [TextArea] public string description;
+
+        [Header("Bonus Attributes")]
+        public List<AttributeValue> bonusAttributes;
     }
 }

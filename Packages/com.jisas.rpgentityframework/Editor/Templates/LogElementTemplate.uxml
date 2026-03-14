@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/TestBuilderTemplate_Style.uss?fileID=7433441132597879392&amp;guid=5dae0104a295a254da17647ecab2177e&amp;type=3#TestBuilderTemplate_Style"/>
+    <Style src="project://database/Packages/com.jisas.rpgentityframework/Editor/USS/RGPEntityWindow_Style.uss?fileID=7433441132597879392&amp;guid=7b4ac743a1328e249aff33624ddf0e6d&amp;type=3#RGPEntityWindow_Style"/>
+    <ui:VisualElement name="log-element" class="bg-dark log-item" style="flex-grow: initial;">
+        <ui:VisualElement name="log-icon" style="flex-grow: initial; width: 30px; height: 30px; background-image: resource(&quot;Icons/warning&quot;); -unity-background-image-tint-color: rgb(236, 226, 39);"/>
+        <ui:VisualElement class="log-content" style="margin-left: 10px;">
+            <ui:Label text="Log Tittle" name="log-tittle" class="log-title"/>
+            <ui:Label text="Here si a log description to the user" name="log-description" class="log-desc"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

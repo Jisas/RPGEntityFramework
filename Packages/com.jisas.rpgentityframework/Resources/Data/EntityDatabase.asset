@@ -24,6 +24,7 @@ MonoBehaviour:
   allClasses:
   - {fileID: 11400000, guid: 924c49c7bd4e17a4ab1a8f73f9d10076, type: 2}
   - {fileID: 11400000, guid: 90cb4a58bca5aa64f80ae5462786c258, type: 2}
+  - {fileID: 11400000, guid: a13ec6d331275244eafa5fff2f143216, type: 2}
   allSubClasses:
   - {fileID: 11400000, guid: f020f40f09c6b394ba1fef3f2015ae1e, type: 2}
   - {fileID: 11400000, guid: 6d0c7bb91eb143b4a9d94f22e2ffb260, type: 2}
@@ -32,6 +33,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 80e19503ae58d5242b8aba4621a22628, type: 2}
   - {fileID: 11400000, guid: f0c76e4b69696364ea5b2faaee20db4b, type: 2}
   - {fileID: 11400000, guid: b4d54d420e57cd44dab21375a538f6f0, type: 2}
+  - {fileID: 11400000, guid: c35210c8d49fec044b41c102ffceba34, type: 2}
   allAbilities:
   - {fileID: 11400000, guid: 60d8ea39bc0c7ff4ea39442538e4f899, type: 2}
   allPresets:
