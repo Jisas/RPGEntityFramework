@@ -19,9 +19,10 @@ namespace RPGFramework.Editor
             wnd.minSize = new Vector2(800, 500);
         }
 
-        private VisualElement _inspectorContent, _inspectorIcon;
+        private VisualElement _inspectorContent, _inspectorIcon, _inspectorPlaceHolder;
         private Label _inspectorTitle, _inspectorDefinition, _inspectorID;
         private Button _createButton, _saveButton, _settingsButton;
+        private ScrollView _inspectorColumn;
         private ListView _itemList;
 
         private VisualElement _navbar;
@@ -41,6 +42,8 @@ namespace RPGFramework.Editor
             rootVisualElement.Add(root);
 
             _inspectorContent = root.Q<VisualElement>("inspector-content");
+            _inspectorColumn = root.Q<ScrollView>("inspector-column");
+            _inspectorPlaceHolder = root.Q<VisualElement>("inspector-place-holder");
             _inspectorIcon = root.Q<VisualElement>("inspector-icon");
             _inspectorTitle = root.Q<Label>("inspector-title");
             _inspectorID = root.Q<Label>("inspector-id");
@@ -259,16 +262,16 @@ namespace RPGFramework.Editor
         }
         private void ShowInInspector(List<object> selectedItems)
         {
-            if (_inspectorContent == null) return;
+            // 1. Determinar si hay algo válido seleccionado
+            bool hasSelection = selectedItems != null && selectedItems.Count > 0 && selectedItems[0] != null;
 
-            _inspectorContent.Clear();
-            if (selectedItems == null || selectedItems.Count == 0 || selectedItems[0] == null)
-            {
-                _inspectorTitle.text = "No selection";
-                _inspectorDefinition.text = "No selection";
-                _inspectorID.text = "ID: No selection";
-                return;
-            }
+            // 2. Cambiar visibilidad usando DisplayStyle
+            // Si hay selección: Ocultamos placeholder, mostramos columna.
+            // Si no hay: Mostramos placeholder, ocultamos columna.
+            _inspectorPlaceHolder.style.display = hasSelection ? DisplayStyle.None : DisplayStyle.Flex;
+            _inspectorColumn.style.display = hasSelection ? DisplayStyle.Flex : DisplayStyle.None;
+
+            if (!hasSelection) return;
 
             var target = selectedItems[0] as ScriptableObject;
 
@@ -340,8 +343,10 @@ namespace RPGFramework.Editor
 
             // 5. Refrescar la UI
             _itemList.Rebuild();
-            _inspectorContent.Clear();
-            _inspectorTitle.text = "No selection";
+            _itemList.ClearSelection(); // limpia la selección de la lista
+            ShowInInspector(null);      // fuerza que se muestre el Placeholder
+
+            Debug.Log($"Entidad eliminada.");
         }
         private void RemoveFromDatabase(RPGDefinition item)
         {
