@@ -1,9 +1,9 @@
 {
   "name": "com.jisas.rpgentityframework",
   "displayName": "RPG Entity Framework",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "unity": "6000.0",
-  "description": "Crea sistemas de razas, clases, subclases y atributos personalizables para RPGs.",
+  "description": "Create customizable race, class, subclass, and attribute systems for RPGs.",
   "keywords": [
     "rpg",
     "framework",
@@ -25,7 +25,6 @@
     }
   ],
   "dependencies": {
-    "com.unity.textmeshpro": "3.0.6",
     "com.unity.modules.ui": "1.0.0"
   }
 }

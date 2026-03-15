@@ -55,7 +55,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="list-column" class="border-right w-64 bg-dark" style="width: 23%; display: flex;">
                 <ui:VisualElement name="search-container" class="border-bottom p-2" style="height: 50px; justify-content: center;">
-                    <ui:TextField name="search-field" placeholder-text=" Search..." class="unity-input" style="height: 32px;"/>
+                    <ui:TextField name="search-field" placeholder-text=" Search..." class="unity-input" style="height: 25px;"/>
                 </ui:VisualElement>
                 <ui:ListView name="item-list" fixed-item-height="24" reorderable="true" class="expand"/>
                 <ui:VisualElement name="footer" class="unity-panel border-top p-2">
