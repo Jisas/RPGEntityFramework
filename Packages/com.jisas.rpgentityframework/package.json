@@ -17,13 +17,12 @@
     "url": "https://github.com/Jisas",
     "email": "jesuscarrerodev@gmail.com"
   },
-  "samples": [
-    {
-      "displayName": "Demo basica de configuraci0n",
-      "description": "Ejemplo de como configurar razas, clases y atributos.",
-      "path": "Samples~/BasicDemo"
-    }
-  ],
+  "samples": 
+   [{
+      "displayName": "2D Sample",
+      "description": "Example of use in 2D projects.",
+      "path": "Samples~/2D Sample"
+    }],
   "dependencies": {
     "com.unity.modules.ui": "1.0.0"
   }

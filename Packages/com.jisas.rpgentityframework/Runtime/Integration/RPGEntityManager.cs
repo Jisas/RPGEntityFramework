@@ -24,16 +24,17 @@ namespace RPGEntityFramework.Runtime
         {
             if (_buildOnStart && _initialPreset != null)
             {
-                InitializeFromPreset(_initialPreset);
+                BuildFromPreset(_initialPreset);
             }
         }
 
         #region INTEGRATION API
 
         /// <summary>
-        /// Build or rebuild the entity using the Builder.
+        /// Build or rebuild the entity using a Preset.
         /// </summary>
-        public void InitializeFromPreset(EntityPresetDefinition preset)
+        /// <param name="preset"> Preset definition for static default entity </param>
+        public void BuildFromPreset(EntityPresetDefinition preset)
         {
             RPGEntityBuilder builder = new();
             _entityModel = builder.FromPreset(preset).Build();
@@ -45,6 +46,7 @@ namespace RPGEntityFramework.Runtime
         /// <summary>
         /// Allows you to inject an externally configured Builder.
         /// </summary>
+        /// <param name="manualBuilder"> External builder for dynamic entity </param>
         public void BuildFromExternalBuilder(RPGEntityBuilder manualBuilder)
         {
             _entityModel = manualBuilder.Build();
@@ -90,6 +92,7 @@ namespace RPGEntityFramework.Runtime
         /// <summary>
         /// Returns the value of an attribute.
         /// </summary>
+        /// <param name="attribute"> The attribute you want to get </param>
         public float GetAttributeValue(AttributeDefinition attribute)
         {
             if (_entityModel == null) return 0;
@@ -99,6 +102,7 @@ namespace RPGEntityFramework.Runtime
         /// <summary>
         /// Determine whether the entity has the ability
         /// </summary>
+        /// <param name="ability"> The ability you want to check </param>
         public bool HasAbility(AbilityDefinition ability)
         {
             if (_entityModel == null) return false;

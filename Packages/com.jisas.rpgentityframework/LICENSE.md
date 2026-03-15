@@ -1,5 +1,5 @@
 MIT License
 
-Copyright (c) 2025 JC
+Copyright (c) 2025 Jisas
 
-Permiso otorgado para usar y modificar este software.
+Permission granted to use and modify this software.

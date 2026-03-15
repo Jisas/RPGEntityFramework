@@ -2,6 +2,8 @@
   <Project Path="UnityEditor.TestRunner.csproj" />
   <Project Path="UnityEngine.TestRunner.csproj" />
   <Project Path="Unity.VisualStudio.Editor.csproj" />
+  <Project Path="Unity.2D.Sprite.Editor.csproj" />
   <Project Path="RPGEntityFramework.Runtime.csproj" />
   <Project Path="RPGEntityFramework.Editor.csproj" />
+  <Project Path="Unity.2D.Sprite.AIIntegration.Editor.csproj" />
 </Solution>
