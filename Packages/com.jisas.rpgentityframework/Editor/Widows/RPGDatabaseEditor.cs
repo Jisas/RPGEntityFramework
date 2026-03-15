@@ -27,6 +27,7 @@ namespace RPGFramework.Editor
         private TextField _searchField;
         private ListView _itemList;
 
+        [SerializeField] 
         private TestBuilderEditor _testBuilderEditor;
         private System.Type _currentType;
         private RPGEntityDatabase _database;

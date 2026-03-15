@@ -220,7 +220,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1248642807}
-  - component: {fileID: 1248642806}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
@@ -228,22 +227,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1248642806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248642805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f946c6268d899e94a9d3daded19f90ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RPGFrameworkTests
-  humanRace: {fileID: 11400000, guid: ffbaace0eda4ae640ac158ce46b49efd, type: 2}
-  highElfSubRace: {fileID: 11400000, guid: 6f03c94db7189404fb55c7ba8e5996da, type: 2}
-  warriorClass: {fileID: 11400000, guid: 90cb4a58bca5aa64f80ae5462786c258, type: 2}
-  strengthAttribute: {fileID: 11400000, guid: b4d54d420e57cd44dab21375a538f6f0, type: 2}
 --- !u!4 &1248642807
 Transform:
   m_ObjectHideFlags: 0

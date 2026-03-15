@@ -6,6 +6,6 @@
 [Serializable]
 public class SerializableAttributeValue
 {
-    public string AttributeId;
+    public string AttributeID;
     public float Value;
 }

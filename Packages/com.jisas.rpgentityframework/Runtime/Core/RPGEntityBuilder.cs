@@ -48,7 +48,7 @@ namespace RPGFramework.Builders
         }
         public RPGEntityBuilder WithRace(RaceDefinition race)
         {
-            _model.Race = race;
+            _model.RaceDef = race;
             if (race != null && race.racialAbilities != null)
             {
                 _model.Abilities.AddRange(race.racialAbilities);
@@ -60,16 +60,16 @@ namespace RPGFramework.Builders
             if (subRace == null) return this;
 
             // VALIDACIÓN: ¿La raza actual permite esta sub-raza?
-            if (!_isFromPreset && _model.Race != null)
+            if (!_isFromPreset && _model.RaceDef != null)
             {
-                if (_model.Race.availableSubRaces != null && !_model.Race.availableSubRaces.Contains(subRace))
+                if (_model.RaceDef.availableSubRaces != null && !_model.RaceDef.availableSubRaces.Contains(subRace))
                 {
-                    Debug.LogWarning($"[RPG Builder] La raza {_model.Race.raceName} no permite la sub-raza {subRace.subRaceName}. Se ignorará la sub-raza.");
+                    Debug.LogWarning($"[RPG Builder] La raza {_model.RaceDef.raceName} no permite la sub-raza {subRace.subRaceName}. Se ignorará la sub-raza.");
                     return this; // Abortamos la asignación
                 }
             }
 
-            _model.SubRace = subRace;
+            _model.SubRaceDef = subRace;
             if (subRace.subRacialAbilities != null)
                 _model.Abilities.AddRange(subRace.subRacialAbilities);
 
@@ -86,12 +86,12 @@ namespace RPGFramework.Builders
             if (classDef == null) return this;
 
             // VALIDACIÓN: ¿La raza actual permite esta clase?
-            if (!_isFromPreset && _model.Race != null)
+            if (!_isFromPreset && _model.RaceDef != null)
             {
                 // Si la lista está vacía, asumimos que puede usar cualquier clase. Si tiene elementos, validamos.
-                if (_model.Race.availableClasses != null && _model.Race.availableClasses.Count > 0 && !_model.Race.availableClasses.Contains(classDef))
+                if (_model.RaceDef.availableClasses != null && _model.RaceDef.availableClasses.Count > 0 && !_model.RaceDef.availableClasses.Contains(classDef))
                 {
-                    Debug.LogWarning($"[RPG Builder] La raza {_model.Race.raceName} no puede ser de la clase {classDef.className}. Se ignorará la clase.");
+                    Debug.LogWarning($"[RPG Builder] La raza {_model.RaceDef.raceName} no puede ser de la clase {classDef.className}. Se ignorará la clase.");
                     return this; // Abortamos la asignación
                 }
             }
@@ -119,7 +119,7 @@ namespace RPGFramework.Builders
                 }
             }
 
-            _model.SubClass = subClass;
+            _model.SubClassDef = subClass;
             // Nota: Aquí en el futuro puedes sumar habilidades o stats específicos de la Sub-Clase
             // de la misma manera que lo hicimos con SubRace.
 
@@ -137,7 +137,7 @@ namespace RPGFramework.Builders
         public RPGEntityModel Build()
         {
             if (string.IsNullOrEmpty(_model.EntityName)) _model.EntityName = "Unknown Entity";
-            if (_model.Race == null) Debug.LogWarning("[RPG Framework] Entidad construida sin Raza.");
+            if (_model.RaceDef == null) Debug.LogWarning("[RPG Framework] Entidad construida sin Raza.");
             if (_model.ClassDef == null) Debug.LogWarning("[RPG Framework] Entidad construida sin Clase.");
 
             _model.Attributes = new Dictionary<AttributeDefinition, float>(_accumulatedAttributes);

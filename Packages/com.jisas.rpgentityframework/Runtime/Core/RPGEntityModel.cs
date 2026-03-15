@@ -6,10 +6,10 @@ namespace RPGEntityFramework.Models
     public class RPGEntityModel
     {
         public string EntityName { get; internal set; }
-        public RaceDefinition Race { get; internal set; }
-        public SubRaceDefinition SubRace { get; internal set; }
+        public RaceDefinition RaceDef { get; internal set; }
+        public SubRaceDefinition SubRaceDef { get; internal set; }
         public ClassDefinition ClassDef { get; internal set; }
-        public SubClassDefinition SubClass { get; internal set; }
+        public SubClassDefinition SubClassDef { get; internal set; }
 
         public Dictionary<AttributeDefinition, float> Attributes { get; internal set; } = new();
         public List<AbilityDefinition> Abilities { get; internal set; } = new();
