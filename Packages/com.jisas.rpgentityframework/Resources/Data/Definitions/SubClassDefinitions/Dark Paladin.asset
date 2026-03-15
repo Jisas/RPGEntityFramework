@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 480994e9513658846b55cf1492573b2a, type: 3}
-  m_Name: DarkPaladin
+  m_Name: Dark Paladin
   m_EditorClassIdentifier: 
-  subClassName: Paladin Oscuro
-  description: 
+  id: e8c56a78-bd45-457a-85a0-e3399a647f9e
   icon: {fileID: 0}
+  subClassName: Dark Paladin
+  description: 
+  bonusAttributes: []

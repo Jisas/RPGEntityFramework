@@ -1,11 +1,13 @@
-using System.Collections.Generic;
 using RPGEntityFramework.Data;
-using UnityEditor.UIElements;
-using UnityEngine.UIElements;
-using System.Linq;
-using UnityEngine;
-using UnityEditor;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using UnityEditor;
+using UnityEditor.UIElements;
+using UnityEngine;
+using UnityEngine.SocialPlatforms;
+using UnityEngine.UIElements;
 
 namespace RPGFramework.Editor
 {
@@ -32,22 +34,25 @@ namespace RPGFramework.Editor
         private DropdownField _raceDropdown, _subRaceDropdown, _classDropdown, _subClassDropdown;
         private Button _createButton, _saveButton, _settingsButton, _btnRecalculate, _btnRunScan, _clearConsoloBtn;
         private ScrollView _inspectorColumn;
+        private TextField _searchField;
         private ListView _itemList;
 
-        private VisualElement _navbar;
         private System.Type _currentType;
         private RPGEntityDatabase _database;
+        private List<RPGDefinition> _currentUnfilteredList;
 
         // Iconos para el estado Dirty
         private Sprite _saveIconNormal;
         private Sprite _warningIcon;
         private bool _isDirty = false;
 
-        private const string BASE_PATH = "Packages/com.jisas.rpgentityframework/Resources/Data/Definitions";
+        private string _basePath = "Packages/com.jisas.rpgentityframework/Resources/Data/Definitions";
         private const string ROOT_VISUAL_TREE_PATH = "Packages/com.jisas.rpgentityframework/Editor/UXML/RGPEntityWindow.uxml";
+        private const string LIST_ELEMENT_TEMPLATE_PATH = "Packages/com.jisas.rpgentityframework/Editor/Templates/ListElementTemplate.uxml";
         private const string PRESET_TEMPLATE_PATH = "Packages/com.jisas.rpgentityframework/Editor/Templates/QuickPresetTemplate.uxml";
         private const string STAT_TEMPLATE_PATH = "Packages/com.jisas.rpgentityframework/Editor/Templates/StatItemTemplate.uxml";
         private const string LOG_TEMPLATE_PATH = "Packages/com.jisas.rpgentityframework/Editor/Templates/LogElementTemplate.uxml";
+        private const string PATH_PREF_KEY = "RPG_Framework_BasePath";
 
         public void CreateGUI()
         {
@@ -64,7 +69,6 @@ namespace RPGFramework.Editor
             _inspectorDefinition = root.Q<Label>("inspector-definition");
             _itemList = root.Q<ListView>("item-list");
             _createButton = root.Q<Button>("create-button");
-            _navbar = root.Q<VisualElement>("sidebar");
             _saveButton = root.Q<Button>("save-button");
             _settingsButton = root.Q<Button>("settings-button");
             _listColumn = root.Q<VisualElement>("list-column");
@@ -79,12 +83,17 @@ namespace RPGFramework.Editor
             _btnRecalculate = root.Q<Button>("btn-recalculate");
             _clearConsoloBtn = root.Q<Button>("clear-console-btn");
             _btnRunScan = root.Q<Button>("btn-run-scan");
+            _searchField = root.Q<TextField>("search-field");
             _database = RPGEntityDatabase.Instance;
 
             // Cargar Iconos
             _saveIconNormal = _saveButton.iconImage.sprite; // Guardamos el original
             _warningIcon = Resources.Load<Sprite>("Icons/warning");
 
+            // Registro de evento para barra de busqueda
+            _searchField?.RegisterValueChangedCallback(evt => FilterList(evt.newValue));
+
+            // Setup de elementos
             SetupListView();
             SetupButtons();
             PopulateTestBuilderDropdowns();
@@ -124,6 +133,31 @@ namespace RPGFramework.Editor
             ShowInInspector(null);
         }
 
+        private void FilterList(string searchTerm)
+        {
+            if (_currentUnfilteredList == null) return;
+
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                // Si no hay texto, restauramos la lista completa
+                _itemList.itemsSource = _currentUnfilteredList;
+            }
+            else
+            {
+                // Filtramos buscando el término en el nombre (ignorando mayúsculas/minúsculas)
+                string termLower = searchTerm.ToLower();
+                var filteredList = _currentUnfilteredList
+                    .Where(item => item != null && item.name.ToLower().Contains(termLower))
+                    .ToList();
+
+                _itemList.itemsSource = filteredList;
+            }
+
+            _itemList.Rebuild();
+            _itemList.ClearSelection();
+            ShowInInspector(null);
+        }
+
         private void SetupButtons()
         {
             _saveButton.clicked += Save;
@@ -151,16 +185,150 @@ namespace RPGFramework.Editor
         private void SetSettingsContextMenus()
         {
             GenericMenu menu = new();
-            menu.AddItem(new GUIContent("Validar Base de Datos"), false, ValidateDatabase);
+
+            menu.AddItem(new GUIContent("Change Base Path..."), false, () =>
+            {
+                // Abrimos el panel en la raíz del proyecto
+                string projectRoot = Path.GetDirectoryName(Application.dataPath);
+                string absolutePath = EditorUtility.OpenFolderPanel("Select Data Folder", _basePath, "");
+
+                if (!string.IsNullOrEmpty(absolutePath))
+                {
+                    // Convertimos la ruta absoluta en una relativa (Assets/... o Packages/...)
+                    string relativePath = FileUtil.GetProjectRelativePath(absolutePath);
+
+                    if (!string.IsNullOrEmpty(relativePath))
+                    {
+                        _basePath = relativePath;
+                        EditorPrefs.SetString(PATH_PREF_KEY, _basePath);
+                        Debug.Log($"Base path updated to: {_basePath}");
+                    }
+                    else
+                    {
+                        EditorUtility.DisplayDialog("Invalid Folder", "The folder must be inside the Project (Assets or Packages).", "OK");
+                    }
+                }
+            });
+            menu.AddItem(new GUIContent("Migrate All Assets to Base Path"), false, () =>
+            {
+                if (EditorUtility.DisplayDialog("Migrate Assets",
+                    $"This will move ALL definitions to {_basePath}. Are you sure?", "Yes, Migrate", "Cancel"))
+                {
+                    MigrateAllAssets();
+                }
+            });
+            menu.AddSeparator("");
             menu.AddItem(new GUIContent("Ping Database Asset"), false, () => EditorGUIUtility.PingObject(_database));
             menu.ShowAsContext();
         }
+        private void MigrateAllAssets()
+        {
+            if (_database == null) return;
+
+            // Limpiamos la ruta de posibles barras finales para evitar rutas como "Folder//Subfolder"
+            _basePath = _basePath.TrimEnd('/', '\\');
+
+            // --- PASO 1: Preparar el terreno (FUERA del StartAssetEditing) ---
+            // Creamos todas las carpetas necesarias primero para que Unity las registre
+            EnsureFolderExists(_basePath);
+
+            // Lista de tipos para crear subcarpetas de categoría
+            System.Type[] types = 
+            {
+                typeof(RaceDefinition), typeof(SubRaceDefinition), typeof(ClassDefinition),
+                typeof(SubClassDefinition), typeof(AttributeDefinition), typeof(AbilityDefinition),
+                typeof(EntityPresetDefinition)
+            };
+
+            foreach (var t in types)
+            {
+                string folderName = t.Name.Replace("Definition", "Definitions");
+                EnsureFolderExists($"{_basePath}/{folderName}");
+            }
+
+            // --- PASO 2: Migración Masiva (DENTRO del StartAssetEditing) ---
+            AssetDatabase.StartAssetEditing();
+            try
+            {
+                MoveCategory(_database.allRaces);
+                MoveCategory(_database.allSubRaces);
+                MoveCategory(_database.allClasses);
+                MoveCategory(_database.allSubClasses);
+                MoveCategory(_database.allAttributes);
+                MoveCategory(_database.allAbilities);
+                MoveCategory(_database.allPresets);
+
+                Debug.Log("Migration logic executed.");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Migration failed: {e.Message}");
+            }
+            finally
+            {
+                AssetDatabase.StopAssetEditing();
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+
+                _itemList.Rebuild();
+                EditorUtility.DisplayDialog("Migration Complete", "All assets have been moved successfully.", "OK");
+            }
+        }
+        private void MoveCategory<T>(List<T> list) where T : RPGDefinition
+        {
+            if (list == null || list.Count == 0) return;
+
+            // Definir ruta
+            string folderName = typeof(T).Name.Replace("Definition", "Definitions");
+            string targetFolder = $"{_basePath}/{folderName}";
+
+            foreach (var item in list)
+            {
+                if (item == null) continue;
+
+                string oldPath = AssetDatabase.GetAssetPath(item);
+                if (string.IsNullOrEmpty(oldPath)) continue;
+
+                string fileName = Path.GetFileName(oldPath);
+                string newPath = $"{targetFolder}/{fileName}";
+
+                // Solo movemos si la ruta es realmente distinta
+                if (oldPath != newPath)
+                {
+                    string error = AssetDatabase.MoveAsset(oldPath, newPath);
+                    if (!string.IsNullOrEmpty(error))
+                    {
+                        Debug.LogWarning($"Could not move {item.name}: {error}");
+                    }
+                }
+            }
+        }
+        private void EnsureFolderExists(string path)
+        {
+            string folderPath = path.Replace("\\", "/");
+            if (AssetDatabase.IsValidFolder(folderPath)) return;
+
+            string[] folders = folderPath.Split('/');
+            string currentPath = folders[0]; // "Assets" o "Packages"
+
+            for (int i = 1; i < folders.Length; i++)
+            {
+                string nextPath = $"{currentPath}/{folders[i]}";
+                if (!AssetDatabase.IsValidFolder(nextPath))
+                {
+                    AssetDatabase.CreateFolder(currentPath, folders[i]);
+                }
+                currentPath = nextPath;
+            }
+        }
+
         private void CreateNewEntity()
         {
             if (_currentType == null) return;
 
-            // 1. Definir ruta (Base + Tipo)
-            string folderPath = $"{BASE_PATH}/{_currentType.Name}s";
+            // 1. Definir ruta
+            string folderName = _currentType.Name.Replace("Definition", "Definitions");
+            string folderPath = $"{_basePath}/{folderName}";
             if (!AssetDatabase.IsValidFolder(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
@@ -175,6 +343,12 @@ namespace RPGFramework.Editor
 
             // 3. Registrar en la base de datos principal
             RegisterInDatabase(newAsset);
+
+            // 4. Actualizar la "caché" local de la lista actual
+            _currentUnfilteredList?.Add(newAsset as RPGDefinition);
+
+            // 5. Forzar el refresco de la UI aplicando el filtro actual (o vacío)
+            FilterList(_searchField?.value ?? "");
 
             AssetDatabase.SaveAssets();
             _itemList.Rebuild();
@@ -210,21 +384,12 @@ namespace RPGFramework.Editor
 
             // 5. Refrescar la UI
             _itemList.Rebuild();
-            _itemList.ClearSelection(); // limpia la selección de la lista
-            ShowInInspector(null);      // fuerza que se muestre el Placeholder
+            _itemList.ClearSelection();             // limpia la selección de la lista
+            _currentUnfilteredList?.Remove(item);   // Actualizar la "caché" local de la lista actual       
+            FilterList(_searchField?.value ?? "");  // Forzar el refresco de la UI aplicando el filtro actual (o vacío)
+            ShowInInspector(null);                  // fuerza que se muestre el Placeholder       
 
             Debug.Log($"Entidad eliminada.");
-        }
-        private void ValidateDatabase()
-        {
-            int issues = 0;
-            foreach (var race in _database.allRaces)
-            {
-                if (race.Icon == null) { Debug.LogWarning($"Validación: La raza {race.name} no tiene icono."); issues++; }
-            }
-
-            if (issues == 0) Debug.Log("Validación: ¡Todo parece estar en orden!");
-            else Debug.Log($"Validación completada: {issues} advertencias encontradas.");
         }
         private void RemoveFromDatabase(RPGDefinition item)
         {
@@ -264,7 +429,7 @@ namespace RPGFramework.Editor
             _itemList.fixedItemHeight = 30;
             _itemList.makeItem = () => 
             {
-                var template = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.jisas.rpgentityframework/Editor/Templates/ListElementTemplate.uxml");
+                var template = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(LIST_ELEMENT_TEMPLATE_PATH);
                 return template.Instantiate();
             };
 
@@ -293,16 +458,22 @@ namespace RPGFramework.Editor
         }
         private void SelectCategory<T>(string title, List<T> source, VisualElement targetElement) where T : ScriptableObject
         {
-            // 1. Actualizar Datos
-            _currentType = typeof(T); // Guardamos el tipo actual
-            _itemList.itemsSource = source;
+            _currentType = typeof(T);
+
+            // Guardamos la lista original y aplicamos a la vista
+            _currentUnfilteredList = source.Cast<RPGDefinition>().ToList();
+            _itemList.itemsSource = _currentUnfilteredList;
+
+            // Limpiamos la barra de búsqueda al cambiar de categoría
+            if (_searchField != null)
+                _searchField.SetValueWithoutNotify("");
+
             _itemList.Rebuild();
-            _itemList.ClearSelection(); // Limpiar inspector al cambiar categoría
+            _itemList.ClearSelection();
 
             var createLabel = rootVisualElement.Q<Button>("create-button");
             createLabel.text = $" New {title}";
 
-            // 2. Gestionar Estilo .active
             if (targetElement != null) SetActiveNavElement(targetElement);
         }
 
@@ -529,7 +700,7 @@ namespace RPGFramework.Editor
             // 1. Agregar la clase a la instancia para que ajuste su tamaño correctamente
             statInst.AddToClassList("stat-item");
 
-            // 2. Buscar las etiquetas (como no les pusiste 'name' en el UXML, las buscamos por tipo)
+            // 2. Buscar las etiquetas
             var labels = statInst.Query<Label>().ToList();
             if (labels.Count >= 2)
             {
